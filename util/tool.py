@@ -1,5 +1,6 @@
 import os
 import random
+import numpy as np
 
 def isClass(obj, classList):
     """
