@@ -42,13 +42,18 @@ Determine whether you want to implement the attack model or the recommendation m
 If you are an attack method, make sure：<br>
 1. Whether you need information of the recommender model, and then set **self.recommenderGradientRequired**. <br>
 2. Whether you need gradient information of training recommender model, and then set **self.recommenderModelRequired**. <br>
-3. Make Your attack type (gradientAttack/dataAttack). <br>
-If gradientAttack: Reimplement function **gradientattack()**<br>
-If dataAttack: Reimplement function **gradientattack()**<br>
+3. Make sure your attack type (gradientAttack/dataAttack). <br>
+* If gradientAttack: Reimplement function **gradientattack()**<br>
+* If dataAttack: Reimplement function **gradientattack()**<br>
 
 
 If you are an attack method, reimplement the following functions：<br>
-  * init(),  * train(),  * save(),  * predict(),  * evaluate(),  * test()
+  * init()
+  * train()  
+  * save()
+  * predict()  
+  * evaluate()  
+  * test()
 
 <h2>Requirements</h2>
 
