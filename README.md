@@ -24,6 +24,8 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 | SGL | Wu et al. Self-supervised Graph Learning for Recommendation, SIGIR'21. | Graph + CL |
 | SimGCL | Yu et al. Are Graph Augmentations Necessary? Simple Graph Contrastive Learning for Recommendation, SIGIR'22. | Graph + CL |
 
+<br>
+
 | **Attack Model** | **Paper** | **Type** |
 | RandomAttack | Lam et al. Shilling Recommender Systems for Fun and Profit. WWW'2004| Heuristic |
 | BandwagonAttack | Gunes et al. Shilling Attacks against Recommender Systems: A Comprehensive Survey. Artif.Intell.Rev.'2014 | Heuristic |
