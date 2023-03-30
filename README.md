@@ -1,4 +1,4 @@
-# ARLib
+# ARLib (Pytorch)
 An open-source framework for conducting data poisoning attacks on recommendation systems, designed to assist researchers and practitioners. <br>
 
 **Members:** <br>
@@ -13,6 +13,17 @@ This repo will be released with our paper in the future.
 
 1. Two configure files **attack_parser.py** and **recommend_parser** are in the directory named conf, and you can select and configure the recommendation model and attack model by modifying the configuration files. <br>
 2. Run main.py.
+
+<h2>Implemented Models</h2>
+
+| **Recommend Model** | **Paper** | **Type** |
+| --- | --- | --- |
+| GMF | Yehuda et al. Matrix Factorization Techniques for Recommender Systems, IEEE Computer'09. | MF-based |
+| WRMF | Hu et al.Collaborative Filtering for Implicit Feedback Datasets, KDD'09. | MF-based |
+| NCF | He et al. Neural Collaborative Filtering, WWW'17. | Deep Learning-based |
+| NGCF | Wang et al. Neural Graph Collaborative Filtering, SIGIR'19. | Graph-based |
+| SGL | Wu et al. Self-supervised Graph Learning for Recommendation, SIGIR'21. | Graph-based + CL |
+| SimGCL | Yu et al. Are Graph Augmentations Necessary? Simple Graph Contrastive Learning for Recommendation, SIGIR'22. | Graph-based + CL |
 
 <h2>Requirements</h2>
 
