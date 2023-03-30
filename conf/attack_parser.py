@@ -4,7 +4,7 @@ def attack_parse_args():
     parser = argparse.ArgumentParser(description='Attack model parameter initialization')
 
     # ===== Genneral parameters ===== #
-    parser.add_argument('--attackModelName', type=str, default="AUSH", metavar='N',
+    parser.add_argument('--attackModelName', type=str, default="RandomRankingAttack", metavar='N',
                         choices=["RandomRankingAttack","BandwagonRankingAttack","AUSH","GOAT","FedRecAttack"],help='the name of attack.')
     parser.add_argument('--maliciousUserSize', type=float, default="0.01", metavar='N',
                         help='proportion/number of users. proportion if value is float (0.01, 0.1), number if value is int (5, 10).')

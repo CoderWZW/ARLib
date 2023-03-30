@@ -5,14 +5,14 @@ def recommend_parse_args():
     parser = argparse.ArgumentParser()
 
     # ===== dataset ===== #
-    parser.add_argument("--dataset", nargs="?", default="mini", help="Choose a dataset:[FilmTrust, ]")
+    parser.add_argument("--dataset", nargs="?", default="ml-100k", help="Choose a dataset:[FilmTrust, ]")
     parser.add_argument("--data_path", nargs="?", default="data/clean/", help="data path.")
     parser.add_argument("--training_data", nargs="?", default="/train.txt", help="training data path.")
     parser.add_argument("--val_data", nargs="?", default="/val.txt", help="validation data path.")
     parser.add_argument("--test_data", nargs="?", default="/test.txt", help="test data path.")
 
     # ===== model ===== #
-    parser.add_argument('--model_name', type=str, default='SimGCL', help='[GMF,WRMF,LightGCN,NCF,NGCF,SGL,SimGCL]')
+    parser.add_argument('--model_name', type=str, default='GMF', help='[GMF,WRMF,LightGCN,NCF,NGCF,SGL,SimGCL]')
     parser.add_argument('--maxEpoch', type=int, default=10, help='number of epochs')
     parser.add_argument('--batch_size', type=int, default=256, help='batch size')
     parser.add_argument('--emb_size', type=int, default=32, help='embedding size')
