@@ -18,12 +18,12 @@ This repo will be released with our paper in the future.
 
 | **Recommend Model** | **Paper** | **Type** |
 | --- | --- | --- |
-| GMF | Yehuda et al. Matrix Factorization Techniques for Recommender Systems, IEEE Computer'09. | MF-based |
-| WRMF | Hu et al.Collaborative Filtering for Implicit Feedback Datasets, KDD'09. | MF-based |
-| NCF | He et al. Neural Collaborative Filtering, WWW'17. | Deep Learning-based |
-| NGCF | Wang et al. Neural Graph Collaborative Filtering, SIGIR'19. | Graph-based |
-| SGL | Wu et al. Self-supervised Graph Learning for Recommendation, SIGIR'21. | Graph-based + CL |
-| SimGCL | Yu et al. Are Graph Augmentations Necessary? Simple Graph Contrastive Learning for Recommendation, SIGIR'22. | Graph-based + CL |
+| GMF | Yehuda et al. Matrix Factorization Techniques for Recommender Systems, IEEE Computer'09. | MF|
+| WRMF | Hu et al.Collaborative Filtering for Implicit Feedback Datasets, KDD'09. | MF |
+| NCF | He et al. Neural Collaborative Filtering, WWW'17. | Deep Learning |
+| NGCF | Wang et al. Neural Graph Collaborative Filtering, SIGIR'19. | Graph |
+| SGL | Wu et al. Self-supervised Graph Learning for Recommendation, SIGIR'21. | Graph + CL |
+| SimGCL | Yu et al. Are Graph Augmentations Necessary? Simple Graph Contrastive Learning for Recommendation, SIGIR'22. | Graph + CL |
 
 <h2>Requirements</h2>
 
