@@ -40,20 +40,16 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 Determine whether you want to implement the attack model or the recommendation model, and then add the file under the corresponding directory.<br>
 
 If you are an attack method, make sure：<br>
-1. Whether you need information of the recommender model<br>
-Set **self.recommenderGradientRequired**<br>
-2. Whether you need gradient information of training recommender model.<br>
-Set **self.recommenderModelRequired**<br>
-3. Make Your attack type (gradientAttack/dataAttack), <br>
+1. Whether you need information of the recommender model, and then set **self.recommenderGradientRequired**. <br>
+2. Whether you need gradient information of training recommender model, and then set **self.recommenderModelRequired**. <br>
+3. Make Your attack type (gradientAttack/dataAttack). <br>
 If gradientAttack: Reimplement function **gradientattack()**<br>
 If dataAttack: Reimplement function **gradientattack()**<br>
 
 
+If you are an attack method, reimplement the following functions：<br>
+init(), train(), save(), predict(), evaluate(), test()
 
-Make your model inherit the proper base class.
-Reimplement the following functions.
-build(), train(), save(), predict()
-Register your model in main.py.
 
 <h2>Requirements</h2>
 
