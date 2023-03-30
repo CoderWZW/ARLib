@@ -1,11 +1,11 @@
 # ARLib (Pytorch)
 An open-source framework for conducting data poisoning attacks on recommendation systems, designed to assist researchers and practitioners. <br>
 
-**Members:** <br><br>
+**Members:** <br>
 Zongwei Wang, Chongqing University, China, zongwei@cqu.edu.cn <br>
-Hao Ma, Chongqing University, China, ma_hao@cqu.edu.cn <br>
+Hao Ma, Chongqing University, China, ma_hao@cqu.edu.cn 
 
-**Supported by:** <br><br>
+**Supported by:** <br>
 Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn 
 
 <h2>Usage</h2>
@@ -48,8 +48,12 @@ If dataAttack: Reimplement function **gradientattack()**<br>
 
 
 If you are an attack method, reimplement the following functions：<br>
-init(), train(), save(), predict(), evaluate(), test()
-
+1. init(), <br>
+2. train(), <br>
+3. save(), <br>
+4. predict(), <br>
+5. evaluate(), <br>
+6. test()
 
 <h2>Requirements</h2>
 
