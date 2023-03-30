@@ -48,7 +48,7 @@ If dataAttack: Reimplement function **gradientattack()**<br>
 
 
 If you are an attack method, reimplement the following functions：<br>
-  **init(),  train(),  save(),  predict(),  evaluate(),  test()**
+  * init(),  * train(),  * save(),  * predict(),  * evaluate(),  * test()
 
 <h2>Requirements</h2>
 
