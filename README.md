@@ -6,9 +6,7 @@ Zongwei Wang, Chongqing University, China, zongwei@cqu.edu.cn <br>
 Hao Ma, Chongqing University, China, ma_hao@cqu.edu.cn <br>
 
 **Supported by:** <br><br>
-Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn <br>
-
-This repo will be released with our paper in the future.
+Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn 
 
 <h2>Usage</h2>
 
