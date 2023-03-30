@@ -24,6 +24,8 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 | SGL | Wu et al. Self-supervised Graph Learning for Recommendation, SIGIR'21. | Graph + CL |
 | SimGCL | Yu et al. Are Graph Augmentations Necessary? Simple Graph Contrastive Learning for Recommendation, SIGIR'22. | Graph + CL |
 
+* CL is short for contrastive learning (including data augmentation); DA is short for data augmentation only
+
 | **Attack Model** | **Paper** | **Type** |
 | --- | --- | --- |
 | RandomAttack | Lam et al. Shilling Recommender Systems for Fun and Profit. WWW'2004| Heuristic |
