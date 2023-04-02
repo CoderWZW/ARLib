@@ -17,7 +17,7 @@ def recommend_parse_args():
     parser.add_argument('--batch_size', type=int, default=256, help='batch size')
     parser.add_argument('--emb_size', type=int, default=32, help='embedding size')
     parser.add_argument('--n_layers', type=int, default=2, help='number of gnn layers')
-    parser.add_argument('--reg', type=float, default=1e-3, help='regularization weight')
+    parser.add_argument('--reg', type=float, default=1e-4, help='regularization weight')
     parser.add_argument('--lRate', type=float, default=0.005, help='learning rate')
     parser.add_argument("--dropout", type=bool, default=True, help="consider  dropout or not")
     parser.add_argument("--dropout_rate", type=float, default=0.2, help="ratio of  dropout")
