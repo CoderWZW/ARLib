@@ -13,9 +13,9 @@ def recommend_parse_args():
 
     # ===== model ===== #
     parser.add_argument('--model_name', type=str, default='GMF', help='[GMF,WRMF,LightGCN,NCF,NGCF,SGL,SimGCL]')
-    parser.add_argument('--maxEpoch', type=int, default=10, help='number of epochs')
+    parser.add_argument('--maxEpoch', type=int, default=50, help='number of epochs')
     parser.add_argument('--batch_size', type=int, default=256, help='batch size')
-    parser.add_argument('--emb_size', type=int, default=32, help='embedding size')
+    parser.add_argument('--emb_size', type=int, default=64, help='embedding size')
     parser.add_argument('--n_layers', type=int, default=2, help='number of gnn layers')
     parser.add_argument('--reg', type=float, default=1e-4, help='regularization weight')
     parser.add_argument('--lRate', type=float, default=0.005, help='learning rate')
