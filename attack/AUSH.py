@@ -44,7 +44,7 @@ class AUSH():
         self.BiLevelOptimizationEpoch = 100
         self.attackEpoch = int(arg.attackEpoch)
 
-    def posionDataAttack(self, epoch1=10, epoch2=10):
+    def posionDataAttack(self, epoch1=50, epoch2=50):
         """
         posion Data Generate
         :param epoch: Total epoch
