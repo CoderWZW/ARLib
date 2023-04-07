@@ -277,7 +277,10 @@ class Manager():
         for i in range(len(self.rawRecommendresult)):
             if "Top" in self.rawRecommendresult[i]:
                 tempName = self.rawRecommendresult[i]
-                self.result[-1][tempName] = dict()
+                if len(self.result)!=1:self.result[-1][tempName] = dict()
+            elif len(self.result)==1:
+                self.result[-1][tempName][re.sub("[0-9\.]", "", self.rawRecommendresult[i])[:-1]] =\
+                    self.result[0][tempName][re.sub("[0-9\.]", "", self.rawRecommendresult[i])[:-1]]
             else:
                 self.result[-1][tempName][re.sub("[0-9\.]", "", self.rawRecommendresult[i])[:-1]] = sum(
                     [self.result[j][tempName][re.sub("[0-9\.]", "", self.rawRecommendresult[i])[:-1]] for j in
@@ -287,7 +290,10 @@ class Manager():
         for i in range(len(self.rawRecommendresult)):
             if "Top" in self.rawRecommendresult[i]:
                 tempName = self.rawRecommendresult[i]
-                self.RecommendTestResult[-1][tempName] = dict()
+                if len(self.RecommendTestResult)!=1:self.RecommendTestResult[-1][tempName] = dict()
+            elif len(self.RecommendTestResult)==1:
+                self.RecommendTestResult[-1][tempName][re.sub("[0-9\.]", "", self.rawRecommendresult[i])[:-1]] =\
+                    self.RecommendTestResult[0][tempName][re.sub("[0-9\.]", "", self.rawRecommendresult[i])[:-1]]
             else:
                 self.RecommendTestResult[-1][tempName][re.sub("[0-9\.]", "", self.rawRecommendresult[i])[:-1]] = sum(
                     [self.RecommendTestResult[j][tempName][re.sub("[0-9\.]", "", self.rawRecommendresult[i])[:-1]] for j
