@@ -28,6 +28,7 @@ class Manager():
         """
         # Evaluation metrics
         self.hitRate = []
+        self.precision=[]
         self.recall = []
         self.ndcg = []
         self.RecommendTestResult = []
@@ -122,6 +123,10 @@ class Manager():
                     self.recommendArg.save_dir + self.recommendModelName + "/" + self.recommendModelName + "_" + str(
                         self.recommendArg.emb_size) + "_"
                     + str(self.recommendArg.n_layers) + "_" + self.datasetName)
+                self.recommendModel.top = self.recommendArg.topK.split(',')
+                self.recommendModel.topN = [int(num) for num in self.recommendModel.top]
+                self.recommendModel.max_N = max(self.recommendModel.topN)
+
             else:
                 if requires_grad:
                     self.requires_grad = requires_grad
@@ -194,6 +199,7 @@ class Manager():
 
             attackmetrics = AttackMetric(self.recommendModel, self.targetItem, self.top)
             self.hitRate.append(attackmetrics.hitRate())
+            self.precision.append(attackmetrics.precision())
             self.recall.append(attackmetrics.recall())
             self.ndcg.append(attackmetrics.NDCG())
 
@@ -201,6 +207,7 @@ class Manager():
             for i, j in enumerate(self.top):
                 result["Top " + str(j)] = dict()
                 result["Top " + str(j)]["HitRate"] = self.hitRate[-1][i]
+                result["Top " + str(j)]["Precision"] = self.precision[-1][i]
                 result["Top " + str(j)]["Recall"] = self.recall[-1][i]
                 result["Top " + str(j)]["NDCG"] = self.ndcg[-1][i]
 
@@ -265,6 +272,10 @@ class Manager():
         for i in range(len(self.hitRate[0])):
             self.avgHitRateAttack.append(sum(map(lambda x: x[i], self.hitRate)) / len(self.hitRate))
 
+        self.avgPrecisionAttack = []
+        for i in range(len(self.precision[0])):
+            self.avgPrecisionAttack.append(sum(map(lambda x: x[i], self.precision)) / len(self.precision))
+
         self.avgRecallAttack = []
         for i in range(len(self.recall[0])):
             self.avgRecallAttack.append(sum(map(lambda x: x[i], self.recall)) / len(self.recall))
@@ -317,6 +328,7 @@ class Manager():
         for i, j in enumerate(self.top):
             result["Top " + str(j)] = dict()
             result["Top " + str(j)]["HitRate"] = self.avgHitRateAttack[i]
+            result["Top " + str(j)]["Precision"] = self.avgPrecisionAttack[i]
             result["Top " + str(j)]["Recall"] = self.avgRecallAttack[i]
             result["Top " + str(j)]["NDCG"] = self.avgNDCGAttack[i]
         message += "\n" + "-" * 10 + "Target Attack Test Result Poisoning Environment on Average (Evaluation Metrics @Top-({}))".format(

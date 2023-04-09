@@ -167,7 +167,7 @@ class AttackMetric(object):
         self.targetItem = targetItem
         self.top = top
 
-    def hitRate(self):
+    def precision(self):
         totalNum = [0 for i in range(len(self.top))]
         hit = [0 for i in range(len(self.top))]
         for i in self.recommendModel.data.user:
@@ -185,6 +185,24 @@ class AttackMetric(object):
             result.append(hit[i] / totalNum[i])
         return result
 
+    def hitRate(self):
+        totalNum = [0 for i in range(len(self.top))]
+        hit = [0 for i in range(len(self.top))]
+        for i in self.recommendModel.data.user:
+            score = self.recommendModel.predict(i)
+            result = []
+            for n, k in enumerate(self.top):
+                result.append(np.argsort(-score)[:k])
+                totalNum[n] += 1
+            for j in self.targetItem:
+                for k in range(len(self.top)):
+                    if j in result[k]:
+                        hit[k] += 1
+                        continue
+        result = []
+        for i in range(len(self.top)):
+            result.append(hit[i] / totalNum[i])
+        return result
 
     def recall(self):
         totalNum = [0 for i in range(len(self.top))]
