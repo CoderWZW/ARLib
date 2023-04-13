@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 from util.algorithm import l2
 from util.tool import targetItemSelect
+from scipy.sparse import vstack,csr_matrix
 
 
 class GOAT():
@@ -36,7 +37,7 @@ class GOAT():
         self.D_r = None
         self.item_itemInteract = self.interact.T @ self.interact
         self.item_itemInteract[self.item_itemInteract > 0] = 1
-        self.itemIntNum = self.item_itemInteract.sum(0)
+        self.itemIntNum = self.item_itemInteract.sum(0).tolist()[0]
 
         self.attackForm = "dataAttack"
         self.recommenderGradientRequired = False
@@ -97,7 +98,7 @@ class GOAT():
             fakeRat[fakeRat > 0.5] = 1
             fakeRat[fakeRat <= 0.5] = 0
         print("tureScore:{}".format(self.D(fakeRatings.cuda()).mean()))
-        return np.vstack([self.interact, fakeRat.detach().numpy()])
+        return vstack([self.interact, csr_matrix(fakeRat)])
 
     def itemSample(self, k, O_u, O_g, O_i):
         I_s = []
@@ -111,7 +112,7 @@ class GOAT():
             I_f.append([])
             while realUser.sum() < O_u * self.itemNum:
                 ind = random.randint(0, self.userNum - 1)
-                realUser = self.interact[ind, :]
+                realUser = self.interact[ind, :].toarray()[0,:]
             if k == 0:
                 k = min(realUser.sum(), int(O_g * self.itemNum))
             itemSet = realUser.nonzero()[0].tolist()

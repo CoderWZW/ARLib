@@ -12,7 +12,7 @@ def recommend_parse_args():
     parser.add_argument("--test_data", nargs="?", default="/test.txt", help="test data path.")
 
     # ===== model ===== #
-    parser.add_argument('--model_name', type=str, default='GMF', help='[GMF,WRMF,LightGCN,NCF,NGCF,SGL,SimGCL]')
+    parser.add_argument('--model_name', type=str, default='LightGCN', help='[GMF,WRMF,LightGCN,NCF,NGCF,SGL,SimGCL]')
     parser.add_argument('--maxEpoch', type=int, default=50, help='number of epochs')
     parser.add_argument('--batch_size', type=int, default=256, help='batch size')
     parser.add_argument('--emb_size', type=int, default=64, help='embedding size')
@@ -23,7 +23,7 @@ def recommend_parse_args():
     parser.add_argument("--dropout_rate", type=float, default=0.2, help="ratio of  dropout")
     parser.add_argument("--cuda", type=bool, default=True, help="use gpu or not")
     parser.add_argument("--gpu_id", type=int, default=0, help="gpu id")
-    parser.add_argument('--topK', nargs='?', default='10, 20', help='topK')
+    parser.add_argument('--topK', nargs='?', default='50', help='topK')
 
 
     # ===== save model ===== #
