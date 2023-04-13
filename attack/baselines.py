@@ -1,6 +1,7 @@
 import numpy as np
 import random
 from util.tool import targetItemSelect
+from scipy.sparse import vstack, csr_matrix
 
 
 class ShillingAttackModel():
@@ -35,14 +36,14 @@ class ShillingAttackModel():
         get N popular items based on the number of feedbacks
         :return: id list
         """
-        return np.argsort(self.interact[:, :].sum(0))[-N:]
+        return np.argsort(self.interact[:, :].sum(0))[0, -N:].tolist()[0]
 
     def getReversePopularItemId(self, N):
         """
         get N unpopular items based on the number of feedbacks
         :return: id list
         """
-        return np.argsort(self.interact[:, :].sum(0))[:N]
+        return np.argsort(self.interact[:, :].sum(0))[0, :N].tolist()[0]
 
     def posionDataAttack(self):
         """
@@ -57,14 +58,15 @@ class RandomRankingAttack(ShillingAttackModel):
 
     def posionDataAttack(self):
         uNum = self.fakeUserNum
-        fakeRat = np.zeros((uNum, self.itemNum))
+        row, col, entries = [], [], []
         for i in range(uNum):
             fillerItemid = random.sample(set(range(self.itemNum)) - set(self.targetItem),
                                          int(self.maliciousFeedbackSize * self.itemNum) - len(self.targetItem))
-            fakeRat[i][fillerItemid] = 1
-            # target item in fake user is interact
-            fakeRat[i, self.targetItem] = 1
-        return np.vstack([self.interact, fakeRat])
+            row += [i for r in range(len(fillerItemid + self.targetItem))]
+            col += fillerItemid + self.targetItem
+            entries += [1 for r in range(len(fillerItemid + self.targetItem))]
+        fakeRat = csr_matrix((entries, (row, col)), shape=(uNum, self.itemNum), dtype=np.float32)
+        return vstack([self.interact, csr_matrix(fakeRat)])
 
 
 class BandwagonRankingAttack(ShillingAttackModel):
@@ -73,16 +75,17 @@ class BandwagonRankingAttack(ShillingAttackModel):
 
     def posionDataAttack(self):
         uNum = self.fakeUserNum
-        fakeRat = np.zeros((uNum, self.itemNum))
+        row, col, entries = [], [], []
         selectItem = self.getPopularItemId(int(self.selectSize * self.itemNum))
         for i in range(uNum):
             fillerItemid = random.sample(set(range(self.itemNum)) - set(self.targetItem) - set(selectItem),
                                          int(self.maliciousFeedbackSize * self.itemNum) - len(self.targetItem) - len(
                                              selectItem))
-            fakeRat[i][fillerItemid] = 1
-            fakeRat[i, selectItem] = 1
-            fakeRat[i, self.targetItem] = 1
-        return np.vstack([self.interact, fakeRat])
+            row += [i for r in range(len(fillerItemid + self.targetItem))]
+            col += fillerItemid + self.targetItem
+            entries += [1 for r in range(len(fillerItemid + self.targetItem))]
+        fakeRat = csr_matrix((entries, (row, col)), shape=(uNum, self.itemNum), dtype=np.float32)
+        return vstack([self.interact, fakeRat])
 
 
 class AOPRankingAttack(ShillingAttackModel):

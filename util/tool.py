@@ -28,10 +28,13 @@ def dataSave(ratings, fileName, id2user, id2item):
     :param id2item: dcit
     """
     ratingList = []
-    for i in range(ratings.shape[0]):
-        for j in range(ratings.shape[1]):
-            if ratings[i][j] == 0: continue
-            ratingList.append((i, j, ratings[i][j]))
+    ind = ratings.nonzero()
+    for i,j in zip(ind[0].tolist(),ind[1].tolist()):
+            ratingList.append((i,j,ratings[i,j]))
+    # for i in range(ratings.shape[0]):
+    #     for j in range(ratings.shape[1]):
+    #         if ratings[i,j] == 0: continue
+    #         ratingList.append((i, j, ratings[i,j]))
     text = []
     for i in ratingList:
         if i[0] in id2user.keys():

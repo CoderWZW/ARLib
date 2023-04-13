@@ -35,12 +35,13 @@ class FedRecAttack():
 
         self.gradMaxLimitation = int(arg.gradMaxLimitation)
         self.gradNumLimitation = int(arg.gradNumLimitation)
-        self.BiLevelOptimizationEpoch = 4
+        self.BiLevelOptimizationEpoch = 10
         self.attackEpoch = int(arg.attackEpoch)
 
     def gradientattack(self, recommender):
+        optimizer = torch.optim.Adam(recommender.model.parameters(), lr=recommender.args.lRate / 10)
         for i in range(self.BiLevelOptimizationEpoch):
-            user_embed, item_embed, usergrad, itemgrad = recommender.train(requires_embgrad=True, Epoch=self.attackEpoch)
+            user_embed, item_embed, usergrad, itemgrad = recommender.train(requires_embgrad=True, Epoch=self.attackEpoch,optimizer=optimizer, evalNum=4)
             user_embed.requires_grad = True
             item_embed.requires_grad = True
             scores = torch.matmul(user_embed, item_embed.transpose(0, 1))

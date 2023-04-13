@@ -172,13 +172,15 @@ class DataLoader():
         return vec
 
     def matrix(self):
-        m = np.zeros((len(self.user),  len(self.item)))
-        for u in self.user:
-            k, v = self.user_rated(u)
-            vec = np.zeros(len(self.item))
-            # print vec
-            for pair in zip(k, v):
-                iid = self.item[pair[0]]
-                vec[iid] = pair[1]
-            m[self.user[u]] = vec
+        # m = np.zeros((len(self.user),  len(self.item)),dtype=np.int8)
+        # for u in self.user:
+        #     k, v = self.user_rated(u)
+        #     vec = np.zeros(len(self.item))
+        #     # print vec
+        #     for pair in zip(k, v):
+        #         iid = self.item[pair[0]]
+        #         vec[iid] = pair[1]
+        #     m[self.user[u]] = vec
+
+        m = self.__create_sparse_interaction_matrix()
         return m
