@@ -66,7 +66,7 @@ class RandomRankingAttack(ShillingAttackModel):
             col += fillerItemid + self.targetItem
             entries += [1 for r in range(len(fillerItemid + self.targetItem))]
         fakeRat = csr_matrix((entries, (row, col)), shape=(uNum, self.itemNum), dtype=np.float32)
-        return vstack([self.interact, csr_matrix(fakeRat)])
+        return vstack([self.interact, fakeRat])
 
 
 class BandwagonRankingAttack(ShillingAttackModel):
@@ -81,9 +81,9 @@ class BandwagonRankingAttack(ShillingAttackModel):
             fillerItemid = random.sample(set(range(self.itemNum)) - set(self.targetItem) - set(selectItem),
                                          int(self.maliciousFeedbackSize * self.itemNum) - len(self.targetItem) - len(
                                              selectItem))
-            row += [i for r in range(len(fillerItemid + self.targetItem))]
-            col += fillerItemid + self.targetItem
-            entries += [1 for r in range(len(fillerItemid + self.targetItem))]
+            row += [i for r in range(len(fillerItemid + self.targetItem + selectItem))]
+            col += fillerItemid + self.targetItem + selectItem
+            entries += [1 for r in range(len(fillerItemid + self.targetItem + selectItem))]
         fakeRat = csr_matrix((entries, (row, col)), shape=(uNum, self.itemNum), dtype=np.float32)
         return vstack([self.interact, fakeRat])
 
