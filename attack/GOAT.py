@@ -98,7 +98,7 @@ class GOAT():
             fakeRat[fakeRat > 0.5] = 1
             fakeRat[fakeRat <= 0.5] = 0
         print("tureScore:{}".format(self.D(fakeRatings.cuda()).mean()))
-        return vstack([self.interact, csr_matrix(fakeRat)])
+        return vstack([self.interact, csr_matrix(fakeRat.detach())])
 
     def itemSample(self, k, O_u, O_g, O_i):
         I_s = []
