@@ -123,11 +123,11 @@ class GOAT():
                     I_f[-1].append(j)
             while len(I_s[-1]) < int(k * 0.3):
                 I_s[-1] += random.sample(
-                    set(list(range(self.userNum))) - set(self.targetItem) - set(I_s[-1]) - set(I_f[-1]),
+                    set(list(range(self.itemNum))) - set(self.targetItem) - set(I_s[-1]) - set(I_f[-1]),
                     int(k * 0.3) - len(I_s[-1]))
             while len(I_f[-1]) + len(I_s[-1]) < k:
                 I_f[-1] += random.sample(
-                    set(list(range(self.userNum))) - set(self.targetItem) - set(I_s[-1]) - set(I_f[-1]),
+                    set(list(range(self.itemNum))) - set(self.targetItem) - set(I_s[-1]) - set(I_f[-1]),
                     k - len(I_f[-1]) - len(I_s[-1]))
             realUserList.append(realUser[I_s[-1] + I_f[-1]])
         return I_s, I_f, realUserList
