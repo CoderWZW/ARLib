@@ -41,7 +41,6 @@ class SGL():
         self.bestPerformance = []
         model = self.model.cuda()
         if optimizer is None: optimizer = torch.optim.Adam(model.parameters(), lr=self.args.lRate)
-        if optimizer is None: optimizer = torch.optim.Adam(model.parameters(), lr=self.args.lRate)
         if requires_adjgrad: gradAll = torch.zeros(self.data.user_num, self.data.item_num).cuda()
         if requires_embgrad:
             self.model.requires_grad = True
