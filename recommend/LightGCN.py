@@ -26,9 +26,10 @@ class LightGCN():
         self.max_N = max(self.topN)
         self.model = LGCN_Encoder(self.data, self.args.emb_size, self.args.n_layers)
 
-    def train(self, requires_adjgrad=False, requires_embgrad=False, gradIterationNum=10, Epoch=0):
+    def train(self, requires_adjgrad=False, requires_embgrad=False, gradIterationNum=10, Epoch=0, optimizer=None, evalNum=5):
+        self.bestPerformance=[]
         model = self.model.cuda()
-        optimizer = torch.optim.Adam(model.parameters(), lr=self.args.lRate)
+        if optimizer is None: optimizer = torch.optim.Adam(model.parameters(), lr=self.args.lRate)
         if requires_embgrad:
             model.requires_grad = True
             self.usergrad = torch.zeros((self.data.user_num, self.args.emb_size)).cuda()
@@ -63,7 +64,7 @@ class LightGCN():
             model.eval()
             with torch.no_grad():
                 self.user_emb, self.item_emb = self.model()
-            if epoch % 5 == 0:
+            if epoch % evalNum == 0:
                 self.evaluate(epoch)
         self.user_emb, self.item_emb = self.best_user_emb, self.best_item_emb
         if requires_adjgrad and requires_embgrad:
