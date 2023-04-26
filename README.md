@@ -39,6 +39,8 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 | AUSH | Lin C et al. Attacking recommender systems with augmented user profiles. CIKM'2020. | dataAttack | GAN |
 | GOAT | Wu et al. Ready for emerging threats to recommender systems? A graph convolution-based generative shilling attack. Information Sciences'2021. | dataAttack | GAN |
 | FedRecAttack | Rong  et al. Fedrecattack: Model poisoning attack to federated recommendation. ICDE'2022. | gradientAttack |Direct Gradient Optimization |
+| RAPU_G | Zhang et al. Data Poisoning Attack against Recommender System Using Incomplete and Perturbed Data. KDD'2021). | dataAttack |optimization |
+| A_ra | Rong  et al. Poisoning Deep Learning Based Recommender Model in Federated Learning Scenarios. IJCAI'2022. | gradientAttack |Direct Gradient Optimization |
 
 <h2>Implement Your Model</h2>
 
