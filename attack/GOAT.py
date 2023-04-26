@@ -94,11 +94,13 @@ class GOAT():
                 fakeRat[step, self.targetItem] = self.maxScore
             else:
                 fakeRat[step, self.targetItem] = self.minScore
+
         if self.maxScore == 1 and self.minScore == 0:
             fakeRat[fakeRat > 0.5] = 1
             fakeRat[fakeRat <= 0.5] = 0
+        self.t = fakeRat
         print("tureScore:{}".format(self.D(fakeRatings.cuda()).mean()))
-        return vstack([self.interact, csr_matrix(fakeRat)])
+        return vstack([self.interact, csr_matrix(fakeRat.detach())])
 
     def itemSample(self, k, O_u, O_g, O_i):
         I_s = []
