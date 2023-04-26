@@ -35,9 +35,12 @@ class SGL():
         self.temp = 0.2
         self.model = SGL_Encoder(self.data, self.args.emb_size, self.drop_rate, self.n_layers, self.temp, self.aug_type)
 
-    def train(self, requires_adjgrad=False, requires_embgrad=False, gradIterationNum=10, Epoch=0):
+
+    def train(self, requires_adjgrad=False, requires_embgrad=False, gradIterationNum=10, Epoch=0, optimizer=None,
+              evalNum=5):
+        self.bestPerformance = []
         model = self.model.cuda()
-        optimizer = torch.optim.Adam(model.parameters(), lr=self.args.lRate)
+        if optimizer is None: optimizer = torch.optim.Adam(model.parameters(), lr=self.args.lRate)
         if requires_adjgrad: gradAll = torch.zeros(self.data.user_num, self.data.item_num).cuda()
         if requires_embgrad:
             self.model.requires_grad = True
@@ -82,7 +85,7 @@ class SGL():
                 self.itemgrad += self.model.embedding_dict["item_emb"].grad
             with torch.no_grad():
                 self.user_emb, self.item_emb = self.model()
-            if epoch % 5 == 0:
+            if epoch % evalNum == 0:
                 self.evaluate(epoch)
         self.user_emb, self.item_emb = self.best_user_emb, self.best_item_emb
         if requires_adjgrad and requires_embgrad:
