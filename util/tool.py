@@ -12,7 +12,7 @@ def isClass(obj, classList):
             return True
     return False
 
-def getPopularItemId(self, interact, n):
+def getPopularItemId(interact, n):
     """
     Get the id of the top n popular items based on the number of ratings
     :return: id list
@@ -70,14 +70,14 @@ def targetItemSelect(data, arg, popularThreshold=0.1):
             Get the id of the top n popular items based on the number of ratings
             :return: id list
             """
-            return np.argsort(interact[:, :].sum(0))[-n:]
+            return np.argsort(interact[:, :].sum(0))[0, -n:].tolist()[0]
 
         def getReversePopularItemId(n):
             """
             Get the ids of the top n unpopular items based on the number of ratings
             :return: id list
             """
-            return np.argsort(interact[:, :].sum(0))[:n]
+            return np.argsort(interact[:, :].sum(0))[0, :n].tolist()[0]
 
         if arg.attackTargetChooseWay == "random":
             targetItem = random.sample(set(list(range(itemNum))),
