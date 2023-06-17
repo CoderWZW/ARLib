@@ -5,7 +5,7 @@ def recommend_parse_args():
     parser = argparse.ArgumentParser()
 
     # ===== dataset ===== #
-    parser.add_argument("--dataset", nargs="?", default="ml-100k", help="Choose a dataset:[FilmTrust, ]")
+    parser.add_argument("--dataset", nargs="?", default="DouBan", help="Choose a dataset:[FilmTrust, ]")
     parser.add_argument("--data_path", nargs="?", default="data/clean/", help="data path.")
     parser.add_argument("--training_data", nargs="?", default="/train.txt", help="training data path.")
     parser.add_argument("--val_data", nargs="?", default="/val.txt", help="validation data path.")

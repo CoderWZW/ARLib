@@ -201,21 +201,24 @@ class LGCN_Encoder(nn.Module):
         self.sparse_norm_adj = TorchGraphInterface.convert_sparse_mat_to_tensor(self.norm_adj).cuda()
 
     def _init_uiAdj(self, ui_adj):
-        try:
-            self.ui_adj = torch.tensor(ui_adj.todense()).cuda().float()
-        except:
-            self.ui_adj = torch.tensor(ui_adj).cuda().float()
-        rowsum = torch.tensor(self.ui_adj.sum(1))
-        d_inv = rowsum ** -0.5
-        d_inv[torch.isinf(d_inv)] = 0.
-        self.d_mat_inv = torch.diag(d_inv)
-        norm_adj_tmp = self.d_mat_inv @ self.ui_adj
-        self.norm_adj_mat = norm_adj_tmp @ self.d_mat_inv
-        self.norm_adj_mat = np.array(self.norm_adj_mat.cpu())
-        (row, col) = np.nonzero(self.norm_adj_mat)
-        values = self.norm_adj_mat[row, col]
-        csr_a = sp.csr_matrix((values, (row, col)), shape=ui_adj.shape)
-        self.sparse_norm_adj = TorchGraphInterface.convert_sparse_mat_to_tensor(csr_a).cuda()
+        # try:
+        #     self.ui_adj = torch.tensor(ui_adj.todense()).cuda().float()
+        # except:
+        #     self.ui_adj = torch.tensor(ui_adj).cuda().float()
+        # rowsum = torch.tensor(self.ui_adj.sum(1))
+        # d_inv = rowsum ** -0.5
+        # d_inv[torch.isinf(d_inv)] = 0.
+        # self.d_mat_inv = torch.diag(d_inv)
+        # norm_adj_tmp = self.d_mat_inv @ self.ui_adj
+        # self.norm_adj_mat = norm_adj_tmp @ self.d_mat_inv
+        # self.norm_adj_mat = np.array(self.norm_adj_mat.cpu())
+        # (row, col) = np.nonzero(self.norm_adj_mat)
+        # values = self.norm_adj_mat[row, col]
+        # csr_a = sp.csr_matrix((values, (row, col)), shape=ui_adj.shape)
+        # self.sparse_norm_adj = TorchGraphInterface.convert_sparse_mat_to_tensor(csr_a).cuda()
+        self.sparse_norm_adj = sp.diags(np.array((1 / np.sqrt(ui_adj.sum(1)))).flatten()) @ ui_adj @ sp.diags(
+            np.array((1 / np.sqrt(ui_adj.sum(0)))).flatten())
+        self.sparse_norm_adj = TorchGraphInterface.convert_sparse_mat_to_tensor(self.sparse_norm_adj).cuda()
 
     def attack_emb(self, users_emb_grad, items_emb_grad):
         with torch.no_grad():

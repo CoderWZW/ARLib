@@ -111,14 +111,13 @@ class A_ra():
             uiAdj[u, :] = 0
             uiAdj[u, self.targetItem] = 1
             uiAdj[u, maxRecNumItemInd[:int(self.maliciousFeedbackSize * self.itemNum)]] = 1
-
         recommender = deepcopy(originRecommender)
         optimizer = torch.optim.Adam(recommender.model.parameters(), lr=recommender.args.lRate / 10)
         for epoch in range(self.BiLevelOptimizationEpoch):
             # outer optimization
-            ui_adj = np.zeros(
-                (self.userNum + self.fakeUserNum + self.itemNum, self.userNum + self.fakeUserNum + self.itemNum))
-            ui_adj[:self.userNum + self.fakeUserNum, self.userNum + self.fakeUserNum:] = uiAdj.toarray()
+            ui_adj = sp.csr_matrix(([], ([], [])), shape=(self.userNum + self.fakeUserNum + self.itemNum, self.userNum + self.fakeUserNum + self.itemNum),
+                                            dtype=np.float32)
+            ui_adj[:self.userNum + self.fakeUserNum, self.userNum + self.fakeUserNum:] = uiAdj
             recommender.model._init_uiAdj(ui_adj + ui_adj.T)
             recommender.train(Epoch=self.attackEpoch, optimizer=optimizer, evalNum=3)
 
