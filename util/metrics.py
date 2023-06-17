@@ -198,7 +198,7 @@ class AttackMetric(object):
                 for k in range(len(self.top)):
                     if j in result[k]:
                         hit[k] += 1
-                        continue
+                        break
         result = []
         for i in range(len(self.top)):
             result.append(hit[i] / totalNum[i])

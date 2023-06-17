@@ -56,10 +56,10 @@ class AUSH():
         if self.G is None:
             print("hava no trained Generator, Generator training")
             self.selectItem = random.sample(set(list(range(self.itemNum))) - set(self.targetItem),
-                                            int(self.selectSize * self.itemNum))
+                                            int(self.selectSize * self.itemNum)) + self.targetItem
 
-            G = Generator(self.itemNum).cuda()
-            D = Discriminator(self.itemNum).cuda()
+            G = Generator(len(self.selectItem)).cuda()
+            D = Discriminator(len(self.selectItem)).cuda()
             optimize_G = torch.optim.Adam(G.parameters(), lr=0.005)
             optimize_D = torch.optim.Adam(D.parameters(), lr=0.005)
             for i in range(self.BiLevelOptimizationEpoch):
@@ -70,25 +70,27 @@ class AUSH():
                                             self.fakeUserNum)
                     # #sample item rating
                     tempInteract = np.array(
-                        [np.random.binomial(1, self.itemP) for i in range(self.fakeUserNum)])
+                        [np.random.binomial(1, self.itemP)[self.selectItem] for i in range(self.fakeUserNum)])
                     ind = self.interact[userSet,:].nonzero()
                     row, col, entries = [], [], []
                     for r,c in zip(ind[0].tolist(),ind[1].tolist()):
+                        if c not in self.selectItem:continue
+                        c = self.selectItem.index(c)
                         row += [r]
                         col += [c]
                         entries += [self.interact[r,c] * tempInteract[r,c]]
                     tempInteract = sp.csr_matrix((entries, (row, col)),
-                                                            shape=(len(userSet), self.itemNum),dtype=np.float32)
+                                                            shape=(len(userSet), len(self.selectItem)),dtype=np.float32)
                     coo = tempInteract.tocoo()
                     inds = torch.LongTensor([coo.row, coo.col])
                     values = torch.from_numpy(coo.data).float()
-                    tempInteract = torch.sparse.FloatTensor(inds, values, coo.shape)
+                    tempInteract = torch.sparse.FloatTensor(inds, values, coo.shape).cuda()
                     # mat1 = self.interact[userSet,:]
                     # mat2 = torch.tensor(tempInteract)
                     # tempInteract = torch.sparse.FloatTensor(mat1._indices(), mat1._values() * mat2[mat1._indices()[0], mat1._indices()[1]],
                     #                              mat1.size())
-                    fakeInteract = G(tempInteract.cuda())
-                    loss1 = -(torch.log(D(tempInteract.cuda())).mean() + torch.log(1 - D(fakeInteract.cuda()))).mean()
+                    fakeInteract = G(tempInteract)
+                    loss1 = -(torch.log(D(tempInteract)).mean() + torch.log(1 - D(fakeInteract))).mean()
                     optimize_D.zero_grad()
                     loss1.backward()
                     optimize_D.step()
@@ -100,29 +102,31 @@ class AUSH():
                                             self.fakeUserNum)
                     # sample item rating
                     tempInteract = np.array(
-                        [np.random.binomial(1, self.itemP) for i in range(self.fakeUserNum)])
+                        [np.random.binomial(1, self.itemP)[self.selectItem] for i in range(self.fakeUserNum)])
                     ind = self.interact[userSet,:].nonzero()
                     row, col, entries = [], [], []
                     for r,c in zip(ind[0].tolist(),ind[1].tolist()):
+                        if c not in self.selectItem:continue
+                        c = self.selectItem.index(c)
                         row += [r]
                         col += [c]
                         entries += [self.interact[r,c] * tempInteract[r,c]]
                     tempInteract = sp.csr_matrix((entries, (row, col)),
-                                                            shape=(len(userSet), self.itemNum),dtype=np.float32)
+                                                            shape=(len(userSet), len(self.selectItem)),dtype=np.float32)
                     coo = tempInteract.tocoo()
                     inds = torch.LongTensor([coo.row, coo.col])
                     values = torch.from_numpy(coo.data).float()
-                    tempInteract = torch.sparse.FloatTensor(inds, values, coo.shape)
-                    fakeInteract = G(tempInteract.cuda())
-                    maskTarget = torch.zeros((self.itemNum, 1)).cuda()
-                    maskTarget[self.targetItem] = 1
+                    tempInteract = torch.sparse.FloatTensor(inds, values, coo.shape).cuda()
+                    fakeInteract = G(tempInteract)
+                    maskTarget = torch.zeros((len(self.selectItem), 1)).cuda()
+                    maskTarget[[self.selectItem.index(i) for i in self.targetItem]] = 1
                     if self.attackType == "push":
                         Q = torch.ones_like(fakeInteract) * self.maxScore
                     else:
                         Q = torch.zeros_like(fakeInteract)
-                    L_recon = (fakeInteract - tempInteract.cuda()) ** 2
+                    L_recon = (fakeInteract - tempInteract) ** 2
                     L_shill = ((Q.cuda() - fakeInteract) @ maskTarget) ** 2
-                    L_GD = torch.log(D(tempInteract.cuda())).mean() + torch.log(1 - D(fakeInteract.cuda())).mean()
+                    L_GD = torch.log(D(tempInteract)).mean() + torch.log(1 - D(fakeInteract)).mean()
                     loss2 = L_GD + L_shill.mean() + L_recon.mean()
                     optimize_G.zero_grad()
                     loss2.backward()
@@ -134,15 +138,17 @@ class AUSH():
         userSet = random.sample(set(list(range(self.userNum))),
                                 self.fakeUserNum)
         tempInteract = np.array(
-            [np.random.binomial(1, self.itemP) for i in range(self.fakeUserNum)])
+            [np.random.binomial(1, self.itemP)[self.selectItem] for i in range(self.fakeUserNum)])
         ind = self.interact[userSet, :].nonzero()
         row, col, entries = [], [], []
         for r, c in zip(ind[0].tolist(), ind[1].tolist()):
+            if c not in self.selectItem: continue
+            c = self.selectItem.index(c)
             row += [r]
             col += [c]
             entries += [self.interact[r, c] * tempInteract[r, c]]
         tempInteract = sp.csr_matrix((entries, (row, col)),
-                                     shape=(len(userSet), self.itemNum), dtype=np.float32)
+                                     shape=(len(userSet), len(self.selectItem)), dtype=np.float32)
         coo = tempInteract.tocoo()
         inds = torch.LongTensor([coo.row, coo.col])
         values = torch.from_numpy(coo.data).float()
@@ -156,9 +162,11 @@ class AUSH():
             ind = fakeRat.nonzero()
             self.fakeRat = fakeRat
             for r, c in zip([u for _ in range(len(ind[0].tolist()))], ind[0].tolist()):
+                if c not in self.selectItem: continue
+                c = self.selectItem.index(c)
                 row += [r]
                 col += [c]
-                entries += [1]
+                entries += [self.interact[r, c] * tempInteract[r, c]]
         fakeRat = csr_matrix((entries, (row, col)), shape=(len(userSet), self.itemNum), dtype=np.float32)
         # print("tureScore:{}".format(self.D(tempInteract.cuda()).mean()))
         return vstack([self.interact, fakeRat])
