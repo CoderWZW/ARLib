@@ -124,9 +124,10 @@ class FedRecAttack():
                         uiAdj2[u, i] = 10e-8
 
             for _ in range(5):
-                ui_adj = np.zeros(
-                    (self.userNum + self.fakeUserNum + self.itemNum, self.userNum + self.fakeUserNum + self.itemNum))
-                ui_adj[:self.userNum + self.fakeUserNum, self.userNum + self.fakeUserNum:] = uiAdj2.toarray()
+                ui_adj = sp.csr_matrix(([], ([], [])), shape=(
+                self.userNum + self.fakeUserNum + self.itemNum, self.userNum + self.fakeUserNum + self.itemNum),
+                                       dtype=np.float32)
+                ui_adj[:self.userNum + self.fakeUserNum, self.userNum + self.fakeUserNum:] = uiAdj
                 tmpRecommender.model._init_uiAdj(ui_adj + ui_adj.T)
                 tmpRecommender.model.sparse_norm_adj.requires_grad = True
 
@@ -181,7 +182,7 @@ class FedRecAttack():
         return self.interact
 
     def gradientattack(self, recommender):
-        self.controlledUser = random.sample(set(range(data.user_num)), self.fakeUserNum)
+        self.controlledUser = random.sample(set(range(self.data.user_num)), self.fakeUserNum)
         optimizer = torch.optim.Adam(recommender.model.parameters(), lr=recommender.args.lRate / 10)
         for i in range(self.BiLevelOptimizationEpoch):
             user_embed, item_embed, usergrad, itemgrad = recommender.train(requires_embgrad=True, Epoch=self.attackEpoch,optimizer=optimizer, evalNum=4)
