@@ -130,11 +130,11 @@ class A_ra():
                         uiAdj2[u, i] = 10e-8
 
             for _ in range(5):
-                _, item_embed, usergrad, itemgrad = tmpRecommender.train(requires_embgrad=True, Epoch=self.attackEpoch,
-                                                                         optimizer=optimizer, evalNum=4)
+                # _, item_embed, usergrad, itemgrad = tmpRecommender.train(requires_embgrad=True, Epoch=self.attackEpoch,
+                #                                                          optimizer=optimizer, evalNum=4)
                 tmpRecommender.model.sparse_norm_adj.requires_grad = True
-                item_embed.requires_grad = True
                 _, item_embed = tmpRecommender.model()
+                # item_embed.requires_grad = True
 
                 approximateUserEmb = (torch.randn((self.n, item_embed.shape[1])) * self.sigma).cuda()
                 loss = 0

@@ -133,7 +133,7 @@ class GMF():
         bp += 'Precision' + ':' + str(self.bestPerformance[1]['Precision']) + ' | '
         bp += 'Recall' + ':' + str(self.bestPerformance[1]['Recall']) + ' | '
         # bp += 'F1' + ':' + str(self.bestPerformance[1]['F1']) + ' | '
-        bp += 'MDCG' + ':' + str(self.bestPerformance[1]['NDCG'])
+        bp += 'NDCG' + ':' + str(self.bestPerformance[1]['NDCG'])
         print('*Best Performance* ')
         print('Epoch:', str(self.bestPerformance[0]) + ',', bp)
         print('-' * 120)

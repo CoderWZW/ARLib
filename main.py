@@ -7,6 +7,8 @@ from util.tool import isClass
 import attack
 
 if __name__ == '__main__':
+    import os
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     # 1. Load configuration 
     recommend_args = recommend_parse_args()
     attack_args = attack_parse_args()
