@@ -1,6 +1,7 @@
 import os
 import random
 import numpy as np
+import torch
 
 def isClass(obj, classList):
     """
@@ -87,10 +88,22 @@ def targetItemSelect(data, arg, popularThreshold=0.1):
                                        targetNum)
         elif arg.attackTargetChooseWay == "unpopular":
             targetItem = random.sample(
-                set(getReversePopularItemId(int((1 - popularThreshold) * itemNum))),
+                set(getReversePopularItemId(int(0.2 * itemNum))),
                 targetNum)
+            # targetItem = random.sample(
+            #     set(getReversePopularItemId(int((1 - popularThreshold) * itemNum))),
+            #     targetNum)
         targetItem = [data.id2item[i] for i in targetItem]
         with open(path, 'w') as f:
             f.writelines(str(targetItem).replace('[', '').replace(']', ''))
         return targetItem
 
+def seedSet(seed):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False

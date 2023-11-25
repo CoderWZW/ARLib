@@ -84,41 +84,6 @@ class RecommendMetric(object):
             sum_NDCG += DCG / IDCG
         return sum_NDCG / len(res)
 
-    # @staticmethod
-    # def MAP(origin, res, N):
-    #     sum_prec = 0
-    #     for user in res:
-    #         hits = 0
-    #         precision = 0
-    #         for n, item in enumerate(res[user]):
-    #             if item[0] in origin[user]:
-    #                 hits += 1
-    #                 precision += hits / (n + 1.0)
-    #         sum_prec += precision / min(len(origin[user]), N)
-    #     return sum_prec / len(res)
-
-    # @staticmethod
-    # def AUC(origin, res, rawRes):
-    #
-    #     from random import choice
-    #     sum_AUC = 0
-    #     for user in origin:
-    #         count = 0
-    #         larger = 0
-    #         itemList = rawRes[user].keys()
-    #         for item in origin[user]:
-    #             item2 = choice(itemList)
-    #             count += 1
-    #             try:
-    #                 if rawRes[user][item] > rawRes[user][item2]:
-    #                     larger += 1
-    #             except KeyError:
-    #                 count -= 1
-    #         if count:
-    #             sum_AUC += float(larger) / count
-    #
-    #     return float(sum_AUC) / len(origin)
-
 def ranking_evaluation(origin, res, N):
     measure = []
     for n in N:
@@ -194,11 +159,8 @@ class AttackMetric(object):
             for n, k in enumerate(self.top):
                 result.append(np.argsort(-score)[:k])
                 totalNum[n] += 1
-            for j in self.targetItem:
-                for k in range(len(self.top)):
-                    if j in result[k]:
-                        hit[k] += 1
-                        break
+            for k in range(len(self.top)):
+                hit[k] += int(len(set(self.targetItem) & set(result[k])) > 0)/len(self.targetItem)
         result = []
         for i in range(len(self.top)):
             result.append(hit[i] / totalNum[i])
