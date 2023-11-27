@@ -65,6 +65,11 @@ If you have a recommender method, reimplement the following functions：<br>
   * evaluate()  
   * test()
 
+<h2>Downlod Dataset</h2>
+
+https://pan.baidu.com/s/1Gw0SI_GZsykPQEngiMvZgA?pwd=akgm 
+key: akgm
+
 <h2>Requirements</h2>
 
 ```
@@ -74,7 +79,6 @@ numpy==1.18.0
 scipy==1.4.1
 torch==1.7.1
 ```
-
 
 
 
