@@ -13,10 +13,12 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 <img src="https://github.com/CoderWZW/ARLib/blob/main/img/framework.jpg" alt="Alt text" width="80%" /><br><br>
 
 <h2>Usage</h2>
+
 ```
-1. Two configure files **attack_parser.py** and **recommend_parser.py** are in the directory named conf, and you can select and configure the recommendation model and attack model by modifying the configuration files. <br>
+1. Two configure files **attack_parser.py** and **recommend_parser.py** are in the directory named conf, and you can select and configure the recommendation model and attack model by modifying the configuration files.
 2. Run main.py.
 ```
+
 <h2>Implemented Models</h2>
 
 | **Recommend Model** | **Paper** |
