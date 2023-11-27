@@ -14,10 +14,9 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 
 <h2>Usage</h2>
 
-```
-1. Two configure files **attack_parser.py** and **recommend_parser.py** are in the directory named conf, and you can select and configure the recommendation model and attack model by modifying the configuration files.
+1. Two configure files **attack_parser.py** and **recommend_parser.py** are in the directory named conf, and you can select and configure the recommendation model and attack model by modifying the configuration files. <br>
 2. Run main.py.
-```
+
 
 <h2>Implemented Models</h2>
 
@@ -50,22 +49,22 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 
 <h2>Implement Your Model</h2>
 
-```
-Determine whether you want to implement the attack model or the recommendation model, and then add the file under the corresponding directory.
+
+Determine whether you want to implement the attack model or the recommendation model, and then add the file under the corresponding directory. <br>
 
 If you have an attack method, make sure：<br>
-1. Whether you need information of the recommender model, and then set **self.recommenderGradientRequired=True**. 
-2. Whether you need information of training recommender model, and then set **self.recommenderModelRequired=True**. 
+1. Whether you need information of the recommender model, and then set **self.recommenderGradientRequired=True**. <br>
+2. Whether you need information of training recommender model, and then set **self.recommenderModelRequired=True**. <br>
 3. Reimplement function **posionDataAttack()**
 
-If you have a recommender method, reimplement the following functions：
+If you have a recommender method, reimplement the following functions：<br>
   * init()
   * posionDataAttack()  
   * save()
   * predict()  
   * evaluate()  
   * test()
-```
+
 
 <h2>Downlod Dataset</h2>
 
