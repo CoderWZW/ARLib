@@ -50,25 +50,27 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 
 <h2>Implement Your Model</h2>
 
-Determine whether you want to implement the attack model or the recommendation model, and then add the file under the corresponding directory.<br>
+'''
+Determine whether you want to implement the attack model or the recommendation model, and then add the file under the corresponding directory.
 
 If you have an attack method, make sure：<br>
-1. Whether you need information of the recommender model, and then set **self.recommenderGradientRequired=True**. <br>
-2. Whether you need information of training recommender model, and then set **self.recommenderModelRequired=True**. <br>
+1. Whether you need information of the recommender model, and then set **self.recommenderGradientRequired=True**. 
+2. Whether you need information of training recommender model, and then set **self.recommenderModelRequired=True**. 
 3. Reimplement function **posionDataAttack()**
 
-If you have a recommender method, reimplement the following functions：<br>
+If you have a recommender method, reimplement the following functions：
   * init()
   * posionDataAttack()  
   * save()
   * predict()  
   * evaluate()  
   * test()
+'''
 
 <h2>Downlod Dataset</h2>
 
 ```
-https://pan.baidu.com/s/1Gw0SI_GZsykPQEngiMvZgA?pwd=akgm <br>
+https://pan.baidu.com/s/1Gw0SI_GZsykPQEngiMvZgA?pwd=akgm
 key: akgm
 ```
 
