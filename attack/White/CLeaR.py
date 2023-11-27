@@ -122,7 +122,7 @@ class CLeaR():
                 emb_cat = torch.cat((user_emb, item_emb_cat), dim=0)
                 SFA = spectral_feature_augmentation(emb_cat, 1)
                 import torch.nn.functional as F
-                sfaloss = -F.l1_loss(SFA, emb_cat)
+                sfaloss = F.l1_loss(SFA, emb_cat)
                 lossall = CWloss + sfaloss
                 optimizer_attack.zero_grad()
                 lossall.backward()
