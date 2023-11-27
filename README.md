@@ -50,7 +50,7 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 
 <h2>Implement Your Model</h2>
 
-'''
+```
 Determine whether you want to implement the attack model or the recommendation model, and then add the file under the corresponding directory.
 
 If you have an attack method, make sure：<br>
@@ -65,7 +65,7 @@ If you have a recommender method, reimplement the following functions：
   * predict()  
   * evaluate()  
   * test()
-'''
+```
 
 <h2>Downlod Dataset</h2>
 
