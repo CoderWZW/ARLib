@@ -20,7 +20,7 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 <h2>Implemented Models</h2>
 
 | **Recommend Model** | **Paper** |
-| --- | --- | --- |
+| --- | --- |
 | GMF | Yehuda et al. Matrix Factorization Techniques for Recommender Systems, IEEE Computer'09.|
 | WRMF | Hu et al.Collaborative Filtering for Implicit Feedback Datasets, KDD'09. |
 | NCF | He et al. Neural Collaborative Filtering, WWW'17. |
@@ -31,8 +31,6 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 | SGL | Wu et al. Self-supervised Graph Learning for Recommendation, SIGIR'21. |
 | SimGCL | Yu et al. Are Graph Augmentations Necessary? Simple Graph Contrastive Learning for Recommendation, SIGIR'22. |
 | XSimGCL | Yu et al. XSimGCL: Towards extremely simple graph contrastive learning for recommendation, TKDE'23. |
-
-* CL is short for contrastive learning (including data augmentation); DA is short for data augmentation only
 
 | **Attack Model** | **Paper** | **Case** |**Method** |
 | --- | --- | --- | --- |
