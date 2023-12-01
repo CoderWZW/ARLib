@@ -39,6 +39,7 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 | RandomAttack | Lam et al. Shilling Recommender Systems for Fun and Profit. WWW'2004| Black | Heuristic |
 | BandwagonAttack | Gunes et al. Shilling Attacks against Recommender Systems: A Comprehensive Survey. Artif.Intell.Rev.'2014 | Black | Heuristic |
 | AUSH | Lin C et al. Attacking recommender systems with augmented user profiles. CIKM'2020. | Gray | Adversarial Learning Attack |
+| LegUP | Lin C et al. Shilling Black-Box Recommender Systems by Learning to Generate Fake User Profiles. IEEE Transactions on Neural Networks and Learning Systems'2022. | Gray | Adversarial Learning Attack |
 | GOAT | Wu et al. Ready for emerging threats to recommender systems? A graph convolution-based generative shilling attack. Information Sciences'2021. | Gray | Adversarial Learning Attack |
 | FedRecAttack | Rong  et al. Fedrecattack: Model poisoning attack to federated recommendation. ICDE'2022. | Gray | Bi-Level Optimization |
 | A_ra | Rong et al. Poisoning Deep Learning Based Recommender Model in Federated Learning Scenarios. IJCAI'2022. | Gray | Bi-Level Optimization |
