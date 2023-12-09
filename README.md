@@ -47,7 +47,8 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 | PGA | Li et al. Data poisoning attacks on factorization-based collaborative filtering. NIPS'2016. | White | Bi-Level Optimization |
 | DL_Attack| Huang et al. Data poisoning attacks to deep learning based recommender systems. arXiv'2021| White| Bi-Level Optimization|
 | PipAttack | Zhang et al. Pipattack: Poisoning federated recommender systems for manipulating item promotion. WSDM'2022. | Gray | Adversarial Learning Attack |
-| RAPU_G | Zhang et al. Data Poisoning Attack against Recommender System Using Incomplete and Perturbed Data. KDD'2021. | White | Bi-Level Optimization |
+| RAPU | Zhang et al. Data Poisoning Attack against Recommender System Using Incomplete and Perturbed Data. KDD'2021. | White | Bi-Level Optimization |
+| PoisonRec | Song et al. Poisonrec: an adaptive data poisoning framework for attacking black-box recommender systems. ICDE'2021. | Black | Reinforcement Learning |
 | CLeaR | Wang et al. Poisoning Attacks Against Contrastive Recommender Systems. arXiv'2023 | White | Bi-Level Optimization |
 
 <h2>Implement Your Model</h2>
