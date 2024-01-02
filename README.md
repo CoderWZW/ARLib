@@ -50,7 +50,7 @@ Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn
 | RAPU | Zhang et al. Data Poisoning Attack against Recommender System Using Incomplete and Perturbed Data. KDD'2021. | White | Bi-Level Optimization |
 | PoisonRec | Song et al. Poisonrec: an adaptive data poisoning framework for attacking black-box recommender systems. ICDE'2021. | Black | Reinforcement Learning |
 | CLeaR | Wang et al. Poisoning Attacks Against Contrastive Recommender Systems. arXiv'2023 | White | Bi-Level Optimization |
-| GTA | Wang et al.  Revisiting data poisoning attacks on deep learning based recommender systems. ISCC 2023 | Black | Bi-Level Optimization |
+| GTA | Wang et al.  Revisiting data poisoning attacks on deep learning based recommender systems. ISCC 2023 | Black | Bi-Level Optimization |
 
 <h2>Implement Your Model</h2>
 
