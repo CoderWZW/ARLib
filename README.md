@@ -12,7 +12,7 @@ The Centre for Information Resilience(CIRES), University of Queensland, Austrili
 
 <h2>Framework</h2>
 
-<img src="https://github.com/CoderWZW/ARLib/blob/main/img/framework.jpg" alt="Alt text" width="80%" /><br><br>
+<img src="https://github.com/CoderWZW/ARLib/blob/main/img/framework.png" alt="Alt text" width="80%" /><br><br>
 
 <h2>Usage</h2>
 
