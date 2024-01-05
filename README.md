@@ -8,7 +8,7 @@ Chenyu Li, Chongqing University, chenyu_li@stu.cqu.edu.cn
 
 **Supported by:** <br>
 Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn <br>
-The Centre for Information Resilience(CIRES), University of Queensland, Austrilia
+ARC Training Centre for Information Resilience (CIRES), University of Queensland, Austrilia
 
 <h2>Framework</h2>
 
