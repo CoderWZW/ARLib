@@ -9,7 +9,7 @@ import scipy.sparse as sp
 from copy import deepcopy
 from util.loss import bpr_loss, l2_reg_loss
 from sklearn.neighbors import LocalOutlierFactor as LOF
-from recommend.GMF import GMF
+from recommender.GMF import GMF
 import logging
 
 

@@ -1,4 +1,4 @@
-# ARLib (Pytorch)
+# ARLib 
 An open-source framework for conducting data poisoning attacks on recommendation systems, designed to assist researchers and practitioners. <br>
 
 **Members:** <br>
@@ -7,7 +7,8 @@ Hao Ma, Chongqing University, China, ma_hao@cqu.edu.cn <br>
 Chenyu Li, Chongqing University, chenyu_li@stu.cqu.edu.cn
 
 **Supported by:** <br>
-Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn 
+Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn <br>
+The Centre for Information Resilience(CIRES), University of Queensland, Austrilia
 
 <h2>Framework</h2>
 

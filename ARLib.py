@@ -1,5 +1,5 @@
 import attack
-import recommend
+import recommender
 from util.DataLoader import DataLoader
 from util.tool import isClass, getPopularItemId, dataSave, targetItemSelect
 from util.metrics import AttackMetric

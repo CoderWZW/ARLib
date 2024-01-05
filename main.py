@@ -20,7 +20,7 @@ if __name__ == '__main__':
     seed = recommend_args.seed
     seedSet(seed)
 
-    import_str = 'from recommend.' + recommend_args.model_name + ' import ' + recommend_args.model_name
+    import_str = 'from recommender.' + recommend_args.model_name + ' import ' + recommend_args.model_name
     exec(import_str)
     import_str = 'from attack.' + attack_args.attackCategory + "." + attack_args.attackModelName + ' import ' + attack_args.attackModelName
     exec(import_str)

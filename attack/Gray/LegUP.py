@@ -5,7 +5,7 @@ import torch.nn as nn
 from util.tool import targetItemSelect
 import scipy.sparse as sp
 from scipy.sparse import vstack,csr_matrix
-from recommend.LightGCN import LightGCN
+from recommender.LightGCN import LightGCN
 import math
 import argparse
 from conf.recommend_parser import recommend_parse_args
