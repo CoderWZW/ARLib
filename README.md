@@ -8,7 +8,7 @@ Chenyu Li, Chongqing University, chenyu_li@stu.cqu.edu.cn
 
 **Supported by:** <br>
 Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn <br>
-ARC Training Centre for Information Resilience (CIRES), University of Queensland, Austrilia
+ARC Training Centre for Information Resilience (CIRES), University of Queensland, Australia
 
 <h2>Framework</h2>
 
@@ -89,5 +89,14 @@ scipy==1.4.1
 torch==1.7.1
 ```
 
+<h2> 
 
+If you find this repo helpful to your research, please cite our paper.
 
+```bibtex
+@article{wang2024poisoning,
+  title={Poisoning Attacks against Recommender Systems: A Survey},
+  author={Wang, Zongwei and Gao, Min and Yu, Junliang and Ma, Hao and Yin, Hongzhi and Sadiq, Shazia},
+  journal={arXiv preprint arXiv:2401.01527},
+  year={2024}
+}
