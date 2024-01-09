@@ -35,23 +35,23 @@ ARC Training Centre for Information Resilience (CIRES), University of Queensland
 | SimGCL | Yu et al. Are Graph Augmentations Necessary? Simple Graph Contrastive Learning for Recommendation, SIGIR'22. |
 | XSimGCL | Yu et al. XSimGCL: Towards extremely simple graph contrastive learning for recommendation, TKDE'23. |
 
-| **Attack Model** | **Paper** | **Case** |**Method** |
-| --- | --- | --- | --- |
-| NoneAttack | N/A | Black | Heuristic |
-| RandomAttack | Lam et al. Shilling Recommender Systems for Fun and Profit. WWW'2004| Black | Heuristic |
-| BandwagonAttack | Gunes et al. Shilling Attacks against Recommender Systems: A Comprehensive Survey. Artif.Intell.Rev.'2014 | Black | Heuristic |
-| AUSH | Lin C et al. Attacking recommender systems with augmented user profiles. CIKM'2020. | Gray | Adversarial Learning Attack |
-| LegUP | Lin C et al. Shilling Black-Box Recommender Systems by Learning to Generate Fake User Profiles. IEEE Transactions on Neural Networks and Learning Systems'2022. | Gray | Adversarial Learning Attack |
-| GOAT | Wu et al. Ready for emerging threats to recommender systems? A graph convolution-based generative shilling attack. Information Sciences'2021. | Gray | Adversarial Learning Attack |
-| FedRecAttack | Rong  et al. Fedrecattack: Model poisoning attack to federated recommendation. ICDE'2022. | Gray | Bi-Level Optimization |
-| A_ra | Rong et al. Poisoning Deep Learning Based Recommender Model in Federated Learning Scenarios. IJCAI'2022. | Gray | Bi-Level Optimization |
-| PGA | Li et al. Data poisoning attacks on factorization-based collaborative filtering. NIPS'2016. | White | Bi-Level Optimization |
-| DL_Attack| Huang et al. Data poisoning attacks to deep learning based recommender systems. arXiv'2021| White| Bi-Level Optimization|
-| PipAttack | Zhang et al. Pipattack: Poisoning federated recommender systems for manipulating item promotion. WSDM'2022. | Gray | Adversarial Learning Attack |
-| RAPU | Zhang et al. Data Poisoning Attack against Recommender System Using Incomplete and Perturbed Data. KDD'2021. | White | Bi-Level Optimization |
-| PoisonRec | Song et al. Poisonrec: an adaptive data poisoning framework for attacking black-box recommender systems. ICDE'2021. | Black | Reinforcement Learning |
-| CLeaR | Wang et al. Poisoning Attacks Against Contrastive Recommender Systems. arXiv'2023 | White | Bi-Level Optimization |
-| GTA | Wang et al.  Revisiting data poisoning attacks on deep learning based recommender systems. ISCC 2023 | Black | Bi-Level Optimization |
+| **Attack Model** | **Paper** | **Case** |
+| --- | --- | --- |
+| NoneAttack | N/A | Black |
+| RandomAttack | Lam et al. Shilling Recommender Systems for Fun and Profit. WWW'2004| Black |
+| BandwagonAttack | Gunes et al. Shilling Attacks against Recommender Systems: A Comprehensive Survey. Artif.Intell.Rev.'2014 | Black |
+| AUSH | Lin C et al. Attacking recommender systems with augmented user profiles. CIKM'2020. | Gray |
+| LegUP | Lin C et al. Shilling Black-Box Recommender Systems by Learning to Generate Fake User Profiles. IEEE Transactions on Neural Networks and Learning Systems'2022. | Gray |
+| GOAT | Wu et al. Ready for emerging threats to recommender systems? A graph convolution-based generative shilling attack. Information Sciences'2021. | Gray |
+| FedRecAttack | Rong  et al. Fedrecattack: Model poisoning attack to federated recommendation. ICDE'2022. | Gray |
+| A_ra | Rong et al. Poisoning Deep Learning Based Recommender Model in Federated Learning Scenarios. IJCAI'2022. | Gray |
+| PGA | Li et al. Data poisoning attacks on factorization-based collaborative filtering. NIPS'2016. | White |
+| DL_Attack| Huang et al. Data poisoning attacks to deep learning based recommender systems. arXiv'2021| White|
+| PipAttack | Zhang et al. Pipattack: Poisoning federated recommender systems for manipulating item promotion. WSDM'2022. | Gray |
+| RAPU | Zhang et al. Data Poisoning Attack against Recommender System Using Incomplete and Perturbed Data. KDD'2021. | White |
+| PoisonRec | Song et al. Poisonrec: an adaptive data poisoning framework for attacking black-box recommender systems. ICDE'2021. | Black |
+| CLeaR | Wang et al. Poisoning Attacks Against Contrastive Recommender Systems. arXiv'2023 | White |
+| GTA | Wang et al.  Revisiting data poisoning attacks on deep learning based recommender systems. ISCC 2023 | Black |
 
 <h2>Implement Your Model</h2>
 
