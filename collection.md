@@ -18,6 +18,7 @@
 |ARG	|Shilling Black-box Review-based Recommender Systems through Fake Review Generation|	SIGKDD|	2023|
 
 <h2> A summary of the surveyed papers on Recommender-Specific Attacks</h2>
+
 |Method	|Paper Title	|Conference/Journal|Year|
 |------ |------|--------|--------|
 |TNA	|Influence function based data poisoning attacks to top-n recommender systems|	WWW|	2020|
