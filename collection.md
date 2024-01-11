@@ -80,10 +80,10 @@
 |Method	|Paper Title	|Conference/Journal|Year|
 |------ |------|--------|--------|
 |CovisitationAttack	|Fake Co-visitation Injection Attacks to Recommender Systems|	NDSS	|2017|
-|A-ra	|Poisoning deep learning based recommender model in federated learning scenarios	arXiv	|2022|
-|AIA	|Revisiting adversarially learned injection attacks against recommender systems	RecSys	|2020|
-|ReverseAttack	|Reverse attack: Black-box attacks on collaborative recommendation	CCS	|2021|
-|RAPU	|Data poisoning attack against recommender system using incomplete and perturbed data	CIKM	|2021|
+|A-ra	|Poisoning deep learning based recommender model in federated learning scenarios	|arXiv	|2022|
+|AIA	|Revisiting adversarially learned injection attacks against recommender systems|	RecSys	|2020|
+|ReverseAttack	|Reverse attack: Black-box attacks on collaborative recommendation|	CCS	|2021|
+|RAPU	|Data poisoning attack against recommender system using incomplete and perturbed data	|CIKM	|2021|
 
 
 <h2> A summary of the surveyed papers on Cost-Efficient Probing Attacks</h2>
