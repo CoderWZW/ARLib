@@ -1,5 +1,6 @@
 
-
+ <h1> Component-Specific Attacks </h1>
+ 
  <h2> A summary of the surveyed papers on Input-Specific Attacks</h2>
 
 |Method	|Paper Title	|Conference/Journal|Year|
@@ -40,7 +41,10 @@
 |PipAttack|	Pipattack: Poisoning federated recommender systems for manipulating item promotion	|WSDM|	2022|
 |CLeaR	|Poisoning Attacks Against Contrastive Recommender Systems	|arXiv	|2023|
 
-<h2> A summary of the surveyed papers on Recommender-Specific Attacks</h2>
+
+<h1>Goal-Driven Attacks<h1>
+ 
+<h2> A summary of the surveyed papers on System Degradation Attacks</h2>
 
 |Method	|Paper Title	|Conference/Journal|Year|
 |------ |------|--------|--------|
@@ -70,6 +74,8 @@
 |CD-Attack	|Data poisoning attacks on cross-domain recommendation	|CIKM	|2019|
 |NCFAttack	|Towards poisoning the neural collaborative filtering-based recommender systems|	ESORICS	|2020|
 
+<h1> Capability Probing Attacks<h1>
+ 
 <h2> A summary of the surveyed papers on Knowledge-Constrained Probing Attacks</h2>
 
 |Method	|Paper Title	|Conference/Journal|Year|
