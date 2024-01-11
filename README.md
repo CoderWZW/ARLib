@@ -1,5 +1,5 @@
 # ARLib 
-An open-source framework for conducting data poisoning attacks on recommendation systems, designed to assist researchers and practitioners. <br>
+An open-source framework for conducting data poisoning attacks on recommendation systems, designed to assist researchers and practitioners. This repo is released with our [survey paper]([https://github.com/Coder-Yu/SELFRec](https://arxiv.org/abs/2401.01527)) on poisoning attack against recommender system. <br>
 
 **Members:** <br>
 Zongwei Wang, Chongqing University, China, zongwei@cqu.edu.cn <br>
