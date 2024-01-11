@@ -4,9 +4,10 @@ This content is under construction.
 
 | Dataset | #Users | #Items | #Interactions | #Density |
 | --- | --- | --- | --- | --- |
+| ML-1M | 6,038 | 3,492 | 575,281 | 2.728% |
 | DouBan | 2,831 | 36,821 | 805,611 | 0.772% |
 | Epinions | 75,887 | 75,881 | 508,837 | 0.009% |
-| ML-1M | 6,038 | 3,492 | 575,281 | 2.728% |
+
 
 
 <h2>Experimental Results on ML-1M</h2>
