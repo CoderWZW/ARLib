@@ -1,6 +1,7 @@
 This content is under construction.
 
 <h2>Statistics of Datasets</h2>
+
 | Dataset | #Users | #Items | #Interactions | #Density |
 | --- | --- | --- | --- | --- |
 | DouBan | 2,831 | 36,821 | 805,611 | 0.772% |
