@@ -34,6 +34,7 @@ Target Item: '371', '3637', '3053', '3334', '158' <br>
 <h2>Experimental Results on DouBan</h2>
 Victim Model: LightGCN <br>
 Target Item: '31232', '35591', '31660', '26924', '28069' <br>
+
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |-----------------|------------|---------|-----------|--------|--------|
 | RandomAttack    | 0.01       | 0.0010  | 0.0002    | 0.0021 | 0.0008 |
