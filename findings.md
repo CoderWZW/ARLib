@@ -25,7 +25,7 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 
 <h2>Experimental Results on ML-1M</h2>
 
-**Target Item**: '371', '3637', '3053', '3334', '158' <br><br>
+**Target Items**: '371', '3637', '3053', '3334', '158' <br><br>
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |:-----------------:|:------------:|:---------:|:-----------:|:--------:|:--------:|
@@ -44,7 +44,7 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 
 <h2>Experimental Results on DouBan</h2>
 
-**Target Item**: '31232', '35591', '31660', '26924', '28069' <br><br>
+**Target Items**: '31232', '35591', '31660', '26924', '28069' <br><br>
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |:-----------------:|:------------:|:---------:|:-----------:|:--------:|:--------:|
@@ -62,7 +62,7 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 
 <h2>Experimental Results on Epinions</h2>
 
-**Target Item**: '38063', '41186', '71296', '35566', '68017' <br><br>
+**Target Items**: '38063', '41186', '71296', '35566', '68017' <br><br>
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |:-----------------:|:------------:|:---------:|:-----------:|:--------:|:--------:|
