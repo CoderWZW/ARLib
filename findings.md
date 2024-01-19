@@ -8,7 +8,7 @@
 
 <h2>Evaluation Protocol</h2>
 
-We split the datasets into three parts (training set, validation set, and test set) in a ratio of 7:1:2. The poisoning data only affects the model training process; therefore, we exclusively utilize the training set data as the known data. Four metrics are used for measuring attack efficiency, i.e., Hit Ratio@50, Precision@50, Recall@50 ,and NDCG@50. Each experiment in this section is conducted 10 times, and then we report the average results.
+We split the datasets into three parts (training set, validation set, and test set) in a ratio of 7:1:2. The poisoning data only affects the model training process; therefore, we exclusively utilize the training set data as the known data. Four metrics are used for measuring attack efficiency, i.e., Hit Ratio@50, Precision@50, Recall@50 ,and NDCG@50. Each experiment in this section is conducted 10 times, and then we report the average results. The victim Model is choosen as LightGCN.
 
 <h2>Findings</h2>
 
@@ -24,8 +24,8 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 
 
 <h2>Experimental Results on ML-1M</h2>
-Victim Model: LightGCN <br>
-Target Item: '371', '3637', '3053', '3334', '158' <br><br>
+
+**Target Item**: <u>'371', '3637', '3053', '3334', '158'</u> <br><br>
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |-----------------|------------|---------|-----------|--------|--------|
@@ -43,8 +43,8 @@ Target Item: '371', '3637', '3053', '3334', '158' <br><br>
 
 
 <h2>Experimental Results on DouBan</h2>
-Victim Model: LightGCN <br>
-Target Item: '31232', '35591', '31660', '26924', '28069' <br><br>
+
+**Target Item**: '31232', '35591', '31660', '26924', '28069' <br><br>
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |-----------------|------------|---------|-----------|--------|--------|
@@ -61,8 +61,8 @@ Target Item: '31232', '35591', '31660', '26924', '28069' <br><br>
 
 
 <h2>Experimental Results on Epinions</h2>
-Victim Model: LightGCN <br>
-Target Item: '38063', '41186', '71296', '35566', '68017' <br><br>
+
+**Target Item**: '38063', '41186', '71296', '35566', '68017' <br><br>
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 | -------------- | ---------- | ------- | --------- | ------ | ----- |
