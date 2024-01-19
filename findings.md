@@ -25,7 +25,7 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 
 <h2>Experimental Results on ML-1M</h2>
 
-**Target Item**: <u>'371', '3637', '3053', '3334', '158'</u> <br><br>
+**Target Item**: '371', '3637', '3053', '3334', '158' <br><br>
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |-----------------|------------|---------|-----------|--------|--------|
