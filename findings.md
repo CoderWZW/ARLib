@@ -1,5 +1,3 @@
-This content is under construction.
-
 <h2>Statistics of Datasets</h2>
 
 | Dataset | #Users | #Items | #Interactions | #Density |
