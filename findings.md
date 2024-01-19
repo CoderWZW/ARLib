@@ -12,6 +12,19 @@ This content is under construction.
 
 We split the datasets into three parts (training set, validation set, and test set) in a ratio of 7:1:2. The poisoning data only affects the model training process; therefore, we exclusively utilize the training set data as the known data. Four metrics are used for measuring attack efficiency, i.e., Hit Ratio@50, Precision@50, Recall@50 ,and NDCG@50. Each experiment in this section is conducted 10 times, and then we report the average results.
 
+<h2>Findings</h2>
+
+We begin by comparing existing poisoning attack methods on three distinct datasets. The results are presented in the following content. In these tables, values shown in bold represent the best performing indices. Upon examining the tables, we can derive the following observations and conclusions: 
+
+1.In environments free from attacks, the probability of targeted items appearing in user recommendations is generally low. Traditional attack methods, such as Random-Attack and Bandwagon-Attack, often do not match the effectiveness of more sophisticated intelligent attack methods. This observation highlights the evolving nature of attack strategies and the need for robust countermeasures.
+
+2.Diverse poisoning attack methods exhibit varying degrees of efficacy across different evaluation metrics. While CLeaR exhibits its formidable threats in the Hit Ratio metric across all cases, it does not consistently lead in other measures. The Hit Ratio indicates the extent to which the target item is visible to users, whereas Precision, Recall, and NDCG offer more nuanced insights into the attack's impact. Depending on their objectives, attackers may opt for specific methods that align with their desired outcomes, whether it be widespread visibility or more targeted influence.
+
+3.The performance of poisoning attack methods varies across different datasets. This variability underscores the difficulty in predicting which poisoning attack method might be deployed in real-world scenarios, as the choice heavily depends on specific circumstances.
+
+Our findings reveal a complex landscape of poisoning attack methods, each with unique strengths and weaknesses across different datasets and evaluation criteria. This complexity necessitates a multi-faceted approach to understanding and mitigating such attacks in recommendation systems.
+
+
 <h2>Experimental Results on ML-1M</h2>
 Victim Model: LightGCN <br>
 Target Item: '371', '3637', '3053', '3334', '158' <br><br>
@@ -49,7 +62,7 @@ Target Item: '31232', '35591', '31660', '26924', '28069' <br><br>
 | FedRecAttack    | 0.01       | 0.0012  | 0.0003    | 0.0027 | 0.0013 |
 
 
-<h2>Experimental Results on DouBan</h2>
+<h2>Experimental Results on Epinions</h2>
 Victim Model: LightGCN <br>
 Target Item: '38063', '41186', '71296', '35566', '68017' <br><br>
 
