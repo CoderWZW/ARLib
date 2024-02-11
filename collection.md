@@ -61,7 +61,7 @@
 |KGAttack	|Knowledge-enhanced black-box attacks for recommendations	|SIGKDD	|2022|
 |ModelExtractionAttack|	Black-box attacks on sequential recommenders via data-free model extraction|	RecSys|	2021|
 |A-ra	|Poisoning deep learning based recommender model in federated learning scenarios|	arXiv|	2022|
-|RAPU|	Data poisoning attack against recommender system using incomplete and perturbed data|	CIKM	|2021|
+|RAPU|	Data poisoning attack against recommender system using incomplete and perturbed data|	KDD	|2021|
 |GTA|	Revisiting Data Poisoning Attacks on Deep Learning Based Recommender Systems	|ISCC	|2023|
 |AutoAttack|	Targeted Shilling Attacks on GNN-based Recommender Systems|	CIKM	|2023|
 
