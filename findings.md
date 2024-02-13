@@ -29,6 +29,7 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |:-----------------:|:------------:|:---------:|:-----------:|:--------:|:--------:|
+| NoneAttack    | 0.01       | 0.000  | 0.0000    | 0.000 | 0.0000 |
 | RandomAttack    | 0.01       | 0.0106  | 0.0019    | 0.0185 | 0.0112 |
 | BandwagonAttack | 0.01       | 0.0133  | 0.0021    | 0.0206 | 0.0131 |
 | AUSH            | 0.01       | 0.0122  | 0.0022    | 0.0217 | 0.0169 |
@@ -39,7 +40,10 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 | CLeaR           | 0.01       | **0.0146**  | 0.0019    | 0.0188 | 0.0092 |
 | DLAttack        | 0.01       | 0.0096  | 0.0018    | 0.0183 | 0.0142 |
 | FedRecAttack    | 0.01       | 0.0136  | 0.0021    | 0.0207 | 0.0113 |
-
+| RLAttack    | 0.01       | 0.0128  | 0.0021    | 0.0212 | 0.0157 |
+| BilevelA    | 0.01       | 0.0126  | 0.0020    | 0.0197 | 0.0101 |
+| BilevelB    | 0.01       | 0.0122  | 0.0019    | 0.0188 | 0.0100 |
+| PipAttack    | 0.01       | 0.0137  | 0.0022    | 0.0189 | 0.0123 |
 
 
 <h2>Experimental Results on DouBan</h2>
@@ -48,6 +52,7 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |:-----------------:|:------------:|:---------:|:-----------:|:--------:|:--------:|
+| NoneAttack    | 0.01       | 0.000  | 0.0000    | 0.000 | 0.0000 |
 | RandomAttack    | 0.01       | 0.0010  | 0.0002    | 0.0021 | 0.0008 |
 | BandwagonAttack | 0.01       | 0.0020  | 0.0010    | 0.0096 | 0.0088 |
 | AUSH            | 0.01       | 0.0022  | 0.0010    | **0.0104** | **0.0102** |
@@ -58,6 +63,10 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 | CLeaR           | 0.01       | **0.0024**  | 0.0005    | 0.0047 | 0.0020 |
 | DLAttack        | 0.01       | 0.0021  | 0.0010    | 0.0099 | 0.0097 |
 | FedRecAttack    | 0.01       | 0.0012  | 0.0003    | 0.0027 | 0.0013 |
+| RLAttack    | 0.01       | 0.0019  | 0.0009    | 0.0091 | 0.0091 |
+| BilevelA    | 0.01       | 0.0013  | 0.0004    | 0.0047 | 0.0023 |
+| BilevelB    | 0.01       | 0.0014  | 0.0003    | 0.0027 | 0.0013 |
+| PipAttack    | 0.01       | 0.0017  | 0.0006    | 0.0033 | 0.0019 |
 
 
 <h2>Experimental Results on Epinions</h2>
@@ -66,6 +75,7 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 
 | **Method**          | **Attack Ratio** | **HitRate@50** | **Precision@50** | **Recall@50** | **NDCG@50**   |
 |:-----------------:|:------------:|:---------:|:-----------:|:--------:|:--------:|
+| NoneAttack    | 0.01       | 0.000  | 0.0000    | 0.000 | 0.0000 |
 | RandomAttack   | 0.01       | 0.0074  | 0.0035    | 0.0346 | 0.0226|
 | BandwagonAttack| 0.01       | 0.0063  | 0.0029    | 0.0291 | 0.0168|
 | AUSH           | 0.01       | 0.0022  | 0.0010    | 0.0107 | 0.0102|
@@ -76,7 +86,10 @@ Our findings reveal a complex landscape of poisoning attack methods, each with u
 | CLeaR          | 0.01       | **0.0131**  | 0.0055    | 0.0552 | 0.0295|
 | DLAttack       | 0.01       | 0.0021  | 0.0010    | 0.0104 | 0.0101|
 | FedRecAttack   | 0.01       | 0.0118  | 0.0054    | 0.0536 | 0.0299|
-
+| RLAttack    | 0.01       | 0.0022  | 0.0009    | 0.0085 | 0.0092|
+| BilevelA    | 0.01       | 0.0098  | 0.0044    | 0.0476 | 0.0288|
+| BilevelB    | 0.01       | 0.0108  | 0.0045    | 0.0341 | 0.0267|
+| PipAttack    | 0.01       | 0.0117  | 0.0046    | 0.0333 | 0.0219 |
 
 
 
