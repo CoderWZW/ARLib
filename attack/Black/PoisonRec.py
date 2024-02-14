@@ -130,11 +130,10 @@ class MyEnv(gym.Env):
         self.maliciousFeedbackNum = maliciousFeedbackNum
         self.fakeUser = fakeUser
 
-        # 定义状态空间和动作空间
         self.observation_space = spaces.Dict({"userId":spaces.Discrete(self.fakeUserNum), "itemInteract":spaces.MultiBinary(item_num)})
         # self.observation_space = spaces.MultiBinary(item_num)
-        # self.action_space = spaces.Discrete(item_num) # 例如，离散动作空间
-        self.action_space = spaces.MultiBinary(item_num) # 例如，离散动作空间
+        # self.action_space = spaces.Discrete(item_num)
+        self.action_space = spaces.MultiBinary(item_num)
 
         # self.state_dim = self.observation_space.shape  # feature number of state
         # self.action_dim = self.action_space.n  # feature number of action
@@ -149,7 +148,6 @@ class MyEnv(gym.Env):
         self.fakeUserid = 0
 
     def reset(self):
-        # 重置环境
         self.itemList = self.targetItem
         self.reward = 0
         if self.fakeUserDone:
