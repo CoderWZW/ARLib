@@ -96,8 +96,6 @@ class LegUP():
                     # print("epoch{} miniepoch{} D:{}".format(i, k1, loss1))
                 D.eval()
                 G.train()
-                epoch2 = 1
-                self.Tepoch = 1
                 for k2 in range(epoch2):
                     def fakeUserInject(recommender, user):
                         Pu, Pi = recommender.model()
