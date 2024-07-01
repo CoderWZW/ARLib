@@ -75,7 +75,7 @@ class DLAttack():
                     scores[batch:batch + self.batchSize, :] = (Pu[batch:batch + self.batchSize, :] \
                                     @ Pi.T).detach()
                 # scores = torch.matmul(Pu, Pi.transpose(0, 1))
-                nozeroInd = uiAdj2.indices
+                nozeroInd = uiAdj2.nonzero()
                 scores[nozeroInd[0],nozeroInd[1]] = -10e8
                 # scores = torch.matmul(Pu, Pi.transpose(0, 1))
                 # scores = scores - 10e8 * torch.tensor(uiAdj2.todense()).cuda()
