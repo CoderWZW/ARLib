@@ -184,7 +184,7 @@ class proxyLG(LightGCN):
                     scores[batch:batch + self.batchSize, :] = (Pu[batch:batch + self.batchSize, :] \
                                     @ Pi.T).detach()
                 # scores = torch.matmul(Pu, Pi.transpose(0, 1))
-                nozeroInd = uiAdj2.indices
+                nozeroInd = uiAdj2.nonzero()
                 scores[nozeroInd[0],nozeroInd[1]] = -10e8
                 _, top_items = torch.topk(scores, topk)
                 top_items = [[iid.item() for iid in user_top] for user_top in top_items]
