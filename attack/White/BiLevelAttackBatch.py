@@ -79,7 +79,7 @@ class BiLevelAttackBatch():
                                     @ Pi.T).detach()
                 # scores = torch.matmul(Pu, Pi.transpose(0, 1))
                 print("scores:", scores)
-                nozeroInd = uiAdj2.indices
+                nozeroInd = uiAdj2.nonzero()
                 scores[nozeroInd[0],nozeroInd[1]] = -10e8
                 _, top_items = torch.topk(scores, topk)
                 print("top_items:", top_items )
