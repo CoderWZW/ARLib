@@ -49,7 +49,7 @@ class LegUP():
         self.recommenderModelRequired = False
         self.BiLevelOptimizationEpoch = 50
         self.Tepoch = 10
-
+        self.batchSize = 128
 
     def posionDataAttack(self, epoch1=25, epoch2=25):
         """
@@ -96,6 +96,8 @@ class LegUP():
                     # print("epoch{} miniepoch{} D:{}".format(i, k1, loss1))
                 D.eval()
                 G.train()
+                epoch2 = 1
+                self.Tepoch = 1
                 for k2 in range(epoch2):
                     def fakeUserInject(recommender, user):
                         Pu, Pi = recommender.model()
@@ -156,40 +158,20 @@ class LegUP():
                         self.lightgcn.model._init_uiAdj(selected_ui_adj + selected_ui_adj.T)
                         self.lightgcn.train(requires_adjgrad=False, requires_embgrad=False, gradIterationNum=10,
                                             Epoch=0, optimizer=None, evalNum=5)
-                        predicted_scores = self.lightgcn.predict(self.lightgcn.data.user_num)
+                        
+                        Pu, Pi = self.lightgcn.model()
+                        Pu = Pu[:self.userNum, :]
+                        predicted_scores = torch.zeros(self.userNum, self.itemNum)
+                        for batch in range(0, self.userNum, self.batchSize):
+                            predicted_scores[batch:batch+self.batchSize, :] = Pu[batch:batch+self.batchSize, :] @ Pi.T
 
                         target_predicted_scores = predicted_scores[:,
                                                   [self.selectItem.index(item) for item in self.targetItem]]
-                        predicted_scores_exp = np.exp(predicted_scores)
-                        target_predicted_scores_exp = np.exp(target_predicted_scores)
-                        target_predicted_scores_exp = np.expand_dims(target_predicted_scores_exp, axis=2)
-                        L_RS = np.sum(target_predicted_scores_exp / predicted_scores_exp)
-
-                    userSet = random.sample(set(list(range(self.userNum))),
-                                            self.fakeUserNum)
-                    # sample item rating
-                    tempInteract = np.array(
-                        [np.random.binomial(1, self.itemP)[self.selectItem] for i in range(self.fakeUserNum)])
-                    ind = self.interact[userSet,:].nonzero()
-                    row, col, entries = [], [], []
-                    for r,c in zip(ind[0].tolist(),ind[1].tolist()):
-                        if c not in self.selectItem:continue
-                        c = self.selectItem.index(c)
-                        row += [r]
-                        col += [c]
-                        entries += [self.interact[r,c] * tempInteract[r,c]]
-                    tempInteract = sp.csr_matrix((entries, (row, col)),
-                                                            shape=(len(userSet), len(self.selectItem)),dtype=np.float32)
-                    coo = tempInteract.tocoo()
-                    inds = torch.LongTensor([coo.row, coo.col])
-                    values = torch.from_numpy(coo.data).float()
-                    tempInteract = torch.sparse.FloatTensor(inds, values, coo.shape).cpu()
-                    fakeInteract = G(tempInteract)
-                    maskTarget = torch.zeros((len(self.selectItem), 1)).cpu()
-                    maskTarget[[self.selectItem.index(i) for i in self.targetItem]] = 1
-                    Q = torch.ones_like(fakeInteract)
-                    L_GD = torch.log(D(tempInteract)).mean() + torch.log(1 - D(fakeInteract)).mean()
-                    loss2 = L_GD +L_RS
+                        predicted_scores_exp = torch.exp(predicted_scores)
+                        target_predicted_scores_exp = torch.exp(target_predicted_scores)
+                        target_predicted_scores_exp = torch.unsqueeze(target_predicted_scores_exp, dim=2)
+                        L_RS = -torch.sum(torch.log(target_predicted_scores_exp / torch.sum(predicted_scores_exp,dim=0)))
+                    loss2 = L_RS
                     optimize_G.zero_grad()
                     loss2.backward()
                     optimize_G.step()
