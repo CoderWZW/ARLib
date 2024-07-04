@@ -11,7 +11,7 @@ from copy import deepcopy
 from util.loss import bpr_loss, l2_reg_loss
 from sklearn.neighbors import LocalOutlierFactor as LOF
 from util.sampler import next_batch_pairwise
-from recommend.LightGCN import LightGCN
+from recommender.LightGCN import LightGCN
 import logging
 
 
