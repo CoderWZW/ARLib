@@ -99,8 +99,9 @@ If you find this repo helpful to your research, please cite our paper.
 
 ```bibtex
 @article{wang2024poisoning,
-  title={Poisoning Attacks against Recommender Systems: A Survey},
-  author={Wang, Zongwei and Gao, Min and Yu, Junliang and Ma, Hao and Yin, Hongzhi and Sadiq, Shazia},
-  journal={arXiv preprint arXiv:2401.01527},
+  title={Poisoning Attacks and Defenses in Recommender Systems: A Survey},
+  author={Wang, Zongwei and Yu, Junliang and Gao, Min and Ye, Guanhua and Sadiq, Shazia and Yin, Hongzhi},
+  journal={arXiv preprint arXiv:2406.01022},
   year={2024}
+}
 }
