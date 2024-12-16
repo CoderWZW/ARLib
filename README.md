@@ -2,8 +2,8 @@
 An open-source framework for conducting data poisoning attacks on recommendation systems, designed to assist researchers and practitioners. This repo is released with our [survey paper](https://arxiv.org/abs/2406.01022) on poisoning attack against recommender system. <br>
 
 **Members:** <br>
-Zongwei Wang, Chongqing University, China, zongwei@cqu.edu.cn <br>
 Hao Ma, Chongqing University, China, ma_hao@cqu.edu.cn <br>
+Zongwei Wang, Chongqing University, China, zongwei@cqu.edu.cn <br>
 Chenyu Li, Chongqing University, chenyu_li@stu.cqu.edu.cn
 
 **Supported by:** <br>
