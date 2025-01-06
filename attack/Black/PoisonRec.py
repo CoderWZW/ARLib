@@ -65,20 +65,18 @@ class PoisonRec():
             self.agent = PPO(CustomPolicy, self.env, verbose=1, clip_range=0.1, gamma=1,n_steps=20,n_epochs=10)
             self.agent.learn(total_timesteps=400)
         self.env = MyEnv(self.item_num, self.fakeUser, self.maliciousFeedbackNum, self.recommender, self.targetItem)
-        while not self.env.fakeUserDone:
-            obs = self.env.reset()
-            done = False
-            total_reward = 0
-            while not done:
-                action, _states = self.agent.predict(obs, deterministic=True)
-                obs, reward, done, info = self.env.step(action)
-                total_reward += reward
-            uiAdj = self.recommender.data.matrix()
+        obs = self.env.reset()
+        done = False
+        total_reward = 0
+        uiAdj = self.recommender.data.matrix()
+        while not done:
+            action, _states = self.agent.predict(obs, deterministic=True)
+            obs, reward, done, info = self.env.step(action)
+            total_reward += reward
             uiAdj[self.fakeUser[ self.env.fakeUserid],:] = 0  
             uiAdj[self.fakeUser[ self.env.fakeUserid],self.env.itemList] = 1
         self.interact = uiAdj
         return self.interact
-
 
     def fakeUserInject(self, recommender):
         Pu, Pi = recommender.model()
@@ -163,17 +161,20 @@ class MyEnv(gym.Env):
             keep_indices = np.random.choice(ones_indices, size=self.maliciousFeedbackNum, replace=False)
             action = np.zeros_like(action)
             action[keep_indices] = 1
+        self.state["itemInteract"][:] = 0
         self.state["itemInteract"][np.where(action == 1)[0]] = 1
         self.state["itemInteract"][self.targetItem] = 1
+        self.itemList = np.where(self.state["itemInteract"] == 1)[0]
         self.fakeUserInjectChange(self.recommender, self.fakeUserid, self.itemList)
+        optimizer = torch.optim.Adam(self.recommender.model.parameters(), lr= self.recommender.args.lRate / 10)
+        self.recommender.train(Epoch=10, optimizer=optimizer, evalNum=1)
         attackmetrics = AttackMetric(self.recommender, self.targetItem, [50])
-        reward = attackmetrics.hitRate() * self.recommender.data.user_num
-        done = True
+        reward = attackmetrics.hitRate()[0] * self.recommender.data.user_num
         if self.fakeUserid == self.fakeUserNum - 1: self.fakeUserDone = True
         self.fakeUserid = (self.fakeUserid + 1) % self.fakeUserNum
         self.state["userId"] = self.fakeUserid
         info = {}
-        return self.state, self.reward, done, info
+        return self.state, reward, self.fakeUserDone, info
 
     def fakeUserInjectChange(self, recommender, fakeUserId, itemList):
         self.userNum = recommender.data.user_num
