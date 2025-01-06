@@ -42,7 +42,6 @@ class RLAttack():
             self.maliciousFeedbackNum = self.maliciousFeedbackSize
         else:
             self.maliciousFeedbackNum = int(self.maliciousFeedbackSize * self.item_num)
-
         if self.maliciousUserSize < 1:
             self.fakeUserNum = int(data.user_num * self.maliciousUserSize)
         else:
@@ -60,17 +59,16 @@ class RLAttack():
             self.agent = PPO('MlpPolicy', self.env, verbose=1, clip_range=0.1, gamma=1,n_steps=20,n_epochs=10)
             self.agent.learn(total_timesteps=400)
         self.env = MyEnv(self.item_num, self.fakeUser, self.maliciousFeedbackNum, self.recommender, self.targetItem)
-        while not self.env.fakeUserDone:
-            obs = self.env.reset()
-            done = False
-            total_reward = 0
-            while not done:
-                action, _states = self.agent.predict(obs, deterministic=True)
-                obs, reward, done, info = self.env.step(action)
-                total_reward += reward
-            uiAdj = self.recommender.data.matrix()
-            uiAdj[self.fakeUser[ self.env.fakeUserid],:] = 0  
-            uiAdj[self.fakeUser[ self.env.fakeUserid],self.env.itemList] = 1
+        uiAdj = self.recommender.data.matrix()
+        obs = self.env.reset()
+        done = False
+        total_reward = 0
+        while not done:
+            action, _states = self.agent.predict(obs, deterministic=True)
+            obs, reward, done, info = self.env.step(action)
+            total_reward += reward
+            uiAdj[self.fakeUser[self.env.fakeUserid], :] = 0
+            uiAdj[self.fakeUser[self.env.fakeUserid], self.env.itemList] = 1
         self.interact = uiAdj
         return self.interact
 
@@ -135,7 +133,7 @@ class MyEnv(gym.Env):
         # self.action_dim = self.action_space.n  # feature number of action
     
         self.if_discrete = True
-        self.itemList = self.targetItem
+        self.itemList = self.targetItem[:]
         # self.state = (np.array(self.itemList),0)
         self.state = np.zeros(self.item_num)
         self.state[self.itemList] = 1
@@ -144,64 +142,47 @@ class MyEnv(gym.Env):
 
     def reset(self):
         # 重置环境
-        self.itemList = self.targetItem
+        self.itemList = self.targetItem[:]
         self.reward = 0
         if self.fakeUserDone:
             self.fakeUserDone = False
             self.fakeUserid = 0
         # self.state = (np.array(self.itemList), self.fakeUserid)
         # self.state = np.array(self.itemList)
-        self.state = np.zeros(self.item_num)
+        self.state = np.zeros(self.item_num, dtype="int")
         self.state[self.itemList] = 1
         return self.state 
 
     def step(self, action): 
         ones_indices = np.where(action == 1)[0]
         if len(ones_indices) > self.maliciousFeedbackNum:
-            # 如果值为 1 的元素个数超过了限制，随机选择保留的元素
             keep_indices = np.random.choice(ones_indices, size=self.maliciousFeedbackNum, replace=False)
-            action = np.zeros_like(action)
+            action = np.zeros_like(action, dtype="int")
             action[keep_indices] = 1
+        self.state[:] = 0
         self.state[np.where(action == 1)[0]] = 1
         self.state[self.targetItem] = 1
+        self.itemList = np.where(self.state == 1)[0]
         self.fakeUserInjectChange(self.recommender, self.fakeUserid, self.itemList)
+        optimizer = torch.optim.Adam(self.recommender.model.parameters(), lr= self.recommender.args.lRate / 10)
+        self.recommender.train(Epoch=10, optimizer=optimizer, evalNum=1)
         attackmetrics = AttackMetric(self.recommender, self.targetItem, [50])
-        reward = attackmetrics.hitRate()*self.recommender.data.user_num
-        done = True
+        reward = attackmetrics.hitRate()[0] * self.recommender.data.user_num
         if self.fakeUserid == self.fakeUserNum - 1: self.fakeUserDone = True
         self.fakeUserid = (self.fakeUserid + 1) % self.fakeUserNum
-        # if action not in self.itemList:
-        #     self.itemList.append(action)
-        #     self.state[action] = 1
-        #     # self.state = np.array(self.itemList)
-        #     # self.state = (np.array(self.itemList), self.fakeUserid)
-        #     if len(self.itemList) >= self.maliciousFeedbackNum:
-        #         self.fakeUserInjectChange(self.recommender, self.fakeUserid, self.itemList)
-        #         attackmetrics = AttackMetric(self.recommender, self.targetItem, [50])
-        #         reward = attackmetrics.hitRate()*self.recommender.data.user_num
-        #         done = True
-        #         if self.fakeUserid == self.fakeUserNum - 1: self.fakeUserDone = True
-        #         self.fakeUserid = (self.fakeUserid + 1)%self.fakeUserNum
-        #     else:
-        #         reward = 0
-        #         done = False
-        # else:
-        #     reward = -10
-        #     done = False
-        #     self.state = np.zeros(self.item_num)
-        #     self.state[self.itemList] = 1
         info = {}
-        return self.state, self.reward, done, info
+        return self.state, reward, self.fakeUserDone, info
 
     def fakeUserInjectChange(self, recommender, fakeUserId, itemList):
         self.userNum = recommender.data.user_num
         self.itemNum = recommender.data.item_num
         uiAdj = recommender.data.matrix()
         uiAdj2 = uiAdj[:, :]
-        uiAdj2[self.fakeUser[fakeUserId],:] = 0  
-        uiAdj2[self.fakeUser[fakeUserId],self.itemList] = 1
+        uiAdj2[self.fakeUser[fakeUserId],:] = 0 
+        uiAdj2[self.fakeUser[fakeUserId], self.itemList] = 1
         ui_adj = sp.csr_matrix(([], ([], [])), shape=(
             self.userNum + self.itemNum, self.userNum  + self.itemNum),
                                 dtype=np.float32)
         ui_adj[:self.userNum , self.userNum:] = uiAdj2
         recommender.model._init_uiAdj(ui_adj + ui_adj.T)
+
