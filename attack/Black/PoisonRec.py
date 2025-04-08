@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import gym
 from gym import spaces
@@ -18,7 +19,7 @@ from scipy.sparse import vstack, csr_matrix
 from stable_baselines3.common.policies import BasePolicy, ActorCriticPolicy, MultiInputActorCriticPolicy, partial
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor, MlpExtractor
 from stable_baselines3.common.distributions import Distribution
-
+from stable_baselines3.common.callbacks import BaseCallback
 
 class PoisonRec():
     def __init__(self, arg, data):
@@ -55,6 +56,7 @@ class PoisonRec():
         self.env = None
         self.item_num = data.item_num
         self.fakeUser = list(range(self.userNum, self.userNum + self.fakeUserNum))
+        self.isNormalized = True
 
     def posionDataAttack(self,recommender):
         self.recommender = recommender
@@ -62,8 +64,12 @@ class PoisonRec():
         if self.env is None:
             # policy_kwargs = dict(features_extractor_class=CustomFeaturesExtractor)
             self.env = MyEnv(self.item_num, self.fakeUser, self.maliciousFeedbackNum, self.recommender, self.targetItem)
-            self.agent = PPO(CustomPolicy, self.env, verbose=1, clip_range=0.1, gamma=1,n_steps=20,n_epochs=10)
-            self.agent.learn(total_timesteps=400)
+            self.agent = PPO(CustomPolicy, self.env, verbose=1, clip_range=0.1, target_kl=0.03, ent_coef=0.1, gamma=1, n_steps=self.fakeUserNum,\
+                                     n_epochs=5, batch_size=self.fakeUserNum, vf_coef=0.5, max_grad_norm=0.5, learning_rate=0.01)
+            if self.isNormalized:
+                self.agent.learn(total_timesteps=self.fakeUserNum * 100, callback=[RewardNormalizer(), EntropyScheduler()])
+            else:
+                self.agent.learn(total_timesteps=self.fakeUserNum * 100, callback=[EntropyScheduler()])
         self.env = MyEnv(self.item_num, self.fakeUser, self.maliciousFeedbackNum, self.recommender, self.targetItem)
         obs = self.env.reset()
         done = False
@@ -73,8 +79,8 @@ class PoisonRec():
             action, _states = self.agent.predict(obs, deterministic=True)
             obs, reward, done, info = self.env.step(action)
             total_reward += reward
-            uiAdj[self.fakeUser[ self.env.fakeUserid],:] = 0  
-            uiAdj[self.fakeUser[ self.env.fakeUserid],self.env.itemList] = 1
+            uiAdj[self.fakeUser[self.env.fakeUserid],:] = 0  
+            uiAdj[self.fakeUser[self.env.fakeUserid],self.env.itemList] = 1
         self.interact = uiAdj
         return self.interact
 
@@ -120,30 +126,23 @@ class PoisonRec():
 class MyEnv(gym.Env):
     def __init__(self, item_num, fakeUser, maliciousFeedbackNum, recommender, targetItem):
         super(MyEnv, self).__init__()
-
         self.item_num = item_num
+        self.userNum = recommender.data.user_num
+        self.itemNum = recommender.data.item_num
         self.fakeUserNum = len(fakeUser)
         self.recommender = recommender
         self.targetItem = targetItem
         self.maliciousFeedbackNum = maliciousFeedbackNum
         self.fakeUser = fakeUser
-
         self.observation_space = spaces.Dict({"userId":spaces.Discrete(self.fakeUserNum), "itemInteract":spaces.MultiBinary(item_num)})
-        # self.observation_space = spaces.MultiBinary(item_num)
-        # self.action_space = spaces.Discrete(item_num)
         self.action_space = spaces.MultiBinary(item_num)
-
-        # self.state_dim = self.observation_space.shape  # feature number of state
-        # self.action_dim = self.action_space.n  # feature number of action
-    
         self.if_discrete = True
         self.itemList = self.targetItem
-        # self.state = [0, np.zeros(self.item_num)]
-        # self.state[1][self.itemList] = 1
         self.state = {"userId":0, "itemInteract":np.zeros(self.item_num)}
         self.state["itemInteract"][self.itemList] = 1
         self.fakeUserDone = False
         self.fakeUserid = 0
+        self.preallocated_matrix = sp.csr_matrix((self.userNum + self.itemNum, self.userNum + self.itemNum))
 
     def reset(self):
         self.itemList = self.targetItem
@@ -166,27 +165,33 @@ class MyEnv(gym.Env):
         self.state["itemInteract"][self.targetItem] = 1
         self.itemList = np.where(self.state["itemInteract"] == 1)[0]
         self.fakeUserInjectChange(self.recommender, self.fakeUserid, self.itemList)
-        optimizer = torch.optim.Adam(self.recommender.model.parameters(), lr= self.recommender.args.lRate / 10)
-        self.recommender.train(Epoch=10, optimizer=optimizer, evalNum=1)
-        attackmetrics = AttackMetric(self.recommender, self.targetItem, [50])
-        reward = attackmetrics.hitRate()[0] * self.recommender.data.user_num
         if self.fakeUserid == self.fakeUserNum - 1: self.fakeUserDone = True
+        if not self.fakeUserDone:
+            reward = 0
+        else:
+            optimizer = torch.optim.Adam(self.recommender.model.parameters(), lr=self.recommender.args.lRate / 10)
+            original_stdout = sys.stdout
+            try:
+                sys.stdout = open(os.devnull, 'w')
+                self.recommender.train(Epoch=10, optimizer=optimizer, evalNum=1)
+            finally:
+                sys.stdout.close()
+                sys.stdout = original_stdout
+            attackmetrics = AttackMetric(self.recommender, self.targetItem, [50])
+            reward = attackmetrics.hitRate()[0] * self.recommender.data.user_num
         self.fakeUserid = (self.fakeUserid + 1) % self.fakeUserNum
         self.state["userId"] = self.fakeUserid
         info = {}
         return self.state, reward, self.fakeUserDone, info
 
     def fakeUserInjectChange(self, recommender, fakeUserId, itemList):
-        self.userNum = recommender.data.user_num
-        self.itemNum = recommender.data.item_num
+
         uiAdj = recommender.data.matrix()
         uiAdj2 = uiAdj[:, :]
         uiAdj2[self.fakeUser[fakeUserId],:] = 0  
         uiAdj2[self.fakeUser[fakeUserId],self.itemList] = 1
-        ui_adj = sp.csr_matrix(([], ([], [])), shape=(
-            self.userNum + self.itemNum, self.userNum  + self.itemNum),
-                                dtype=np.float32)
-        ui_adj[:self.userNum , self.userNum:] = uiAdj2
+        ui_adj = self.preallocated_matrix.copy()
+        ui_adj[:self.userNum, self.userNum:] = uiAdj2
         recommender.model._init_uiAdj(ui_adj + ui_adj.T)
 
 class CustomFeaturesExtractor(BaseFeaturesExtractor):
@@ -387,10 +392,39 @@ class LSTMNet(nn.Module):
         # Policy network
         self.dim = feature_dim
         self.DNN = nn.Sequential(nn.Linear(self.dim, self.dim),
-        nn.ReLU(), nn.Linear(self.dim, self.dim), nn.ReLU())
+        nn.ReLU(), nn.Linear(self.dim, self.dim))
         self.LSTM = nn.LSTM(input_size=self.dim, hidden_size=self.dim, num_layers=2)
 
     def forward(self, E_st, E_item):
         h_t, _ = self.LSTM(E_st)
         output = torch.softmax(self.DNN(h_t[-1,:,:]) @ E_item.T,dim=1)
         return output
+
+class RewardNormalizer(BaseCallback):
+    def __init__(self, verbose=0):
+        super().__init__(verbose)
+        self.reward_history = []
+
+    def _on_step(self):
+        return True 
+
+    def _on_rollout_end(self):
+        rollout_buffer = self.model.rollout_buffer
+        rewards = np.array(rollout_buffer.rewards)
+        mean = rewards.mean()
+        std = rewards.std() + 1e-8
+        normalized_rewards = (rewards - mean) / std
+        rollout_buffer.rewards = normalized_rewards.tolist()
+        print(f"Batch reward mean: {mean:.2f}, standard deviation: {std:.2f}")
+        print(f"Normalized reward range: [{normalized_rewards.min():.2f}, {normalized_rewards.max():.2f}]")
+        return True
+
+class EntropyScheduler(BaseCallback):
+    def __init__(self, verbose=0):
+        super().__init__()
+        self.ent_coef = 0.1
+
+    def _on_step(self):
+        if self.num_timesteps % 100 == 0:
+            self.model.ent_coef *= 0.9
+        return True
