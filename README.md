@@ -3,8 +3,11 @@ An open-source framework for conducting data poisoning attacks on recommendation
 
 **Members:** <br>
 Hao Ma, Chongqing University, China, ma_hao@cqu.edu.cn <br>
+Zeao Chen, Chongqing University, China, zeao_chen@stu.cqu.edu.cn<br>
+Chenyu Li, Chongqing University, China, chenyu_li@stu.cqu.edu.cn
+
+**Creator:** <br>
 Zongwei Wang, Chongqing University, China, zongwei@cqu.edu.cn <br>
-Chenyu Li, Chongqing University, chenyu_li@stu.cqu.edu.cn
 
 **Supported by:** <br>
 Prof. Min Gao, Chongqing University, China, gaomin@cqu.edu.cn <br>
