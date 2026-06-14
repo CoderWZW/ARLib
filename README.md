@@ -1,3 +1,35 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=CoderWZW&project=ARLib&lang=as">অসমীয়া</
+      </div>
+    </div>
+  </details>
+</div>
+
 # ARLib 
 An open-source framework for conducting data poisoning attacks on recommendation systems, designed to assist researchers and practitioners. This repo is released with our [survey paper](https://arxiv.org/abs/2406.01022) on poisoning attack against recommender system. <br>
 
